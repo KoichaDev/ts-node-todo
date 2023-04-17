@@ -11,9 +11,11 @@ const handleLogin = (req: Request<{}, {}, LoginRequest>, res: Response) => {
 
 	for (const user of users) {
 		if (requestUsername !== user.username || requestPassword !== user.password) {
-			return res.send({
+			return res.status(400).send({
 				status: 400,
-				error: 'Not valid',
+				error: {
+					message: 'not valid',
+				},
 			});
 		}
 	}
