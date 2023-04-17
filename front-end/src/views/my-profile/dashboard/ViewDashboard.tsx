@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import EditTodo from '../todos/EditTodo';
+import ViewTodo from '../todos/ViewTodo';
+import EditTodo from '../todos/CreateTodo';
 
 const ViewDashboard = () => {
 	const navigate = useNavigate();
@@ -23,6 +24,7 @@ const ViewDashboard = () => {
 	}, [isMounted]);
 	return (
 		<>
+			<ViewTodo />
 			<EditTodo />
 		</>
 	);

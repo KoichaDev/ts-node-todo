@@ -1,6 +1,6 @@
 import { useId } from 'react';
 
-const EditTodo = () => {
+const CreateTodo = () => {
 	const inputTextId = useId();
 	const toggleId = useId();
 
@@ -27,4 +27,4 @@ const EditTodo = () => {
 	);
 };
 
-export default EditTodo;
+export default CreateTodo;
