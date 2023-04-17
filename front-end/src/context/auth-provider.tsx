@@ -13,6 +13,7 @@ const AuthContext = createContext<AuthContextType>({
 	isLoggedIn: false,
 	setIsLoggedIn: () => {},
 });
+1;
 
 type AuthProviderProps = {
 	children: React.ReactNode;

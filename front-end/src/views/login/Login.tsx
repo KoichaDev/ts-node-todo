@@ -1,7 +1,8 @@
 import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 
-import { authContext } from '../../context/auth-provider';
+import { authContext } from '@/context/auth-provider';
 import axios from 'axios';
 
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
@@ -9,19 +10,22 @@ type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
 const Login = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
-
 	const { setIsLoggedIn } = useContext(authContext);
 
 	const handleChangeUsername = (e: ChangeEvent) => setUsername(e.target.value);
 
 	const handleChangePassword = (e: ChangeEvent) => setPassword(e.target.value);
+	const navigate = useNavigate();
 
 	const { mutate: sendMutationAuthLogin } = useMutation({
 		mutationFn: (payload: { username: string; password: string }) => {
 			return axios.post('http://localhost:8000/auth', payload);
 		},
 		onError: () => setIsLoggedIn(false),
-		onSuccess: () => setIsLoggedIn(true),
+		onSuccess: () => {
+			setIsLoggedIn(true);
+			navigate('/dashboard');
+		},
 	});
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
