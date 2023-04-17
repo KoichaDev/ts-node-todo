@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import './Header.scss';
 
 const Header = () => {
-	const routes = [{ label: 'Logout', path: '/' }];
+	const routes = [{ textContent: 'Logout', path: '/' }];
 
 	const handleLogout = () => {
 		localStorage.setItem(
@@ -17,13 +17,14 @@ const Header = () => {
 		<header className='[ nav-menu ]'>
 			<menu>
 				{routes.map((route, index) => {
+					const { textContent, path } = route;
 					return (
 						<li key={index}>
 							<Link
 								className='nav-menu__link'
 								onClick={handleLogout}
-								to={route.path}>
-								{route.label}
+								to={path}>
+								{textContent}
 							</Link>
 						</li>
 					);

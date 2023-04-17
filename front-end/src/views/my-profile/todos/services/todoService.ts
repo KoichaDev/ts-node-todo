@@ -13,3 +13,7 @@ const URLS = {
 export const fetchTodos = () => {
 	return axios.get<TodosData[]>(URLS.fetchTodos);
 };
+
+export const createTodo = () => {
+	return axios.post();
+};
