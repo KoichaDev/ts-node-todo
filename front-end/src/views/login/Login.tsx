@@ -13,7 +13,14 @@ const Login = () => {
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		axios.post('http://localhost:3000/users/0');
+
+		axios.post('http://localhost:8000/auth', {
+			username,
+			password,
+		});
+
+		setUsername('');
+		setPassword('');
 	};
 
 	return (
