@@ -1,7 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authContext } from '@/context/auth-provider';
+
 import axios from 'axios';
 
 type PayloadAuthMutationType = {
@@ -14,8 +15,14 @@ const URLS = {
 };
 
 const useAuthLoginMutation = () => {
-	const { setIsLoggedIn } = useContext(authContext);
+	const { isLoggedIn, setIsLoggedIn } = useContext(authContext);
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		localStorage.getItem('auth') ?? {
+			isLoggedIn,
+		};
+	}, [isLoggedIn]);
 
 	// prettier-ignore
 	const loginAuthMutation = useMutation((payload: PayloadAuthMutationType) => {
@@ -25,6 +32,7 @@ const useAuthLoginMutation = () => {
 			onError: () => setIsLoggedIn(false),
 			onSuccess: () => {
 				setIsLoggedIn(true);
+				localStorage.setItem('auth', JSON.stringify({isLoggedIn: true}))
 				navigate('/dashboard');
 			},
 		}

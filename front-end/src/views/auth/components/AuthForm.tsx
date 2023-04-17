@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import useAuthLoginMutation from './hooks/useAuth';
+import { useState, useEffect } from 'react';
+import useAuthLoginMutation from '../hooks/useAuth';
 
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
@@ -13,11 +13,9 @@ const initialState: Auth = {
 	password: '',
 };
 
-const Login = () => {
+const AuthForm = () => {
 	const [auth, setAuth] = useState(initialState);
 	const { loginAuthMutation } = useAuthLoginMutation();
-
-	const isSuccess = loginAuthMutation.isSuccess;
 
 	const handleChangeUsername = (e: ChangeEvent) => {
 		const enteredUsername = e.target.value;
@@ -55,16 +53,18 @@ const Login = () => {
 				type='text'
 				value={auth.username}
 				onChange={handleChangeUsername}
+				placeholder='username...'
 			/>
 
 			<input
 				type='password'
 				value={auth.password}
 				onChange={handleChangePassword}
+				placeholder='password...'
 			/>
 			<button type='submit'>Enter</button>
 		</form>
 	);
 };
 
-export default Login;
+export default AuthForm;
