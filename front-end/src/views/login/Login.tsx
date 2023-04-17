@@ -1,56 +1,65 @@
-import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
-
-import { authContext } from '@/context/auth-provider';
-import axios from 'axios';
+import { useState } from 'react';
+import useAuthLoginMutation from './hooks/useAuth';
 
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
+type Auth = {
+	username: string;
+	password: string;
+};
+
+const initialState: Auth = {
+	username: '',
+	password: '',
+};
+
 const Login = () => {
-	const [username, setUsername] = useState('');
-	const [password, setPassword] = useState('');
-	const { setIsLoggedIn } = useContext(authContext);
+	const [auth, setAuth] = useState(initialState);
+	const { loginAuthMutation } = useAuthLoginMutation();
 
-	const handleChangeUsername = (e: ChangeEvent) => setUsername(e.target.value);
+	const isSuccess = loginAuthMutation.isSuccess;
 
-	const handleChangePassword = (e: ChangeEvent) => setPassword(e.target.value);
-	const navigate = useNavigate();
+	const handleChangeUsername = (e: ChangeEvent) => {
+		const enteredUsername = e.target.value;
+		setAuth((prevState) => {
+			return { ...prevState, username: enteredUsername };
+		});
+	};
 
-	const { mutate: sendMutationAuthLogin } = useMutation({
-		mutationFn: (payload: { username: string; password: string }) => {
-			return axios.post('http://localhost:8000/auth', payload);
-		},
-		onError: () => setIsLoggedIn(false),
-		onSuccess: () => {
-			setIsLoggedIn(true);
-			navigate('/dashboard');
-		},
-	});
+	const handleChangePassword = (e: ChangeEvent) => {
+		const enteredPassword = e.target.value;
+
+		setAuth((prevState) => {
+			return { ...prevState, password: enteredPassword };
+		});
+	};
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const payload = {
-			username,
-			password,
+			username: auth.username,
+			password: auth.password,
 		};
 
-		sendMutationAuthLogin(payload);
-		setUsername('');
-		setPassword('');
+		loginAuthMutation.mutate(payload);
+
+		setAuth({
+			username: '',
+			password: '',
+		});
 	};
 
 	return (
 		<form onSubmit={handleSubmit}>
 			<input
 				type='text'
-				value={username}
+				value={auth.username}
 				onChange={handleChangeUsername}
 			/>
 
 			<input
 				type='password'
-				value={password}
+				value={auth.password}
 				onChange={handleChangePassword}
 			/>
 			<button type='submit'>Enter</button>

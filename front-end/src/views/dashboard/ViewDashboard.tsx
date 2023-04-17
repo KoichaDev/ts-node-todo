@@ -13,7 +13,6 @@ const ViewDashboard = () => {
 		if (isMounted && !isLoggedIn) {
 			return navigate('/unauthorized');
 		}
-
 		return setIsMounted(true);
 	}, [isLoggedIn, isMounted]);
 
