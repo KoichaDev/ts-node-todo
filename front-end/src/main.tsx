@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import AuthProvider from './context/auth-provider';
 import router from './router';
-import './index.css';
+import './scss/main.scss';
 
 const queryClient = new QueryClient();
 
