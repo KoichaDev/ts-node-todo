@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import useAuthLoginMutation from '../hooks/useAuth';
 
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
@@ -8,13 +8,13 @@ type Auth = {
 	password: string;
 };
 
-const initialState: Auth = {
+const initState: Auth = {
 	username: '',
 	password: '',
 };
 
 const AuthForm = () => {
-	const [auth, setAuth] = useState(initialState);
+	const [auth, setAuth] = useState(initState);
 	const { loginAuthMutation } = useAuthLoginMutation();
 
 	const handleChangeUsername = (e: ChangeEvent) => {
@@ -41,10 +41,7 @@ const AuthForm = () => {
 
 		loginAuthMutation.mutate(payload);
 
-		setAuth({
-			username: '',
-			password: '',
-		});
+		setAuth(initState);
 	};
 
 	return (

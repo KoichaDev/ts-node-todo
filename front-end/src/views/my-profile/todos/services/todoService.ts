@@ -1,19 +1,15 @@
 import axios from 'axios';
-
-export type TodosData = {
-	readonly id: string;
-	todo: string;
-	completed: Boolean;
-};
+import { CreateTodoTypes, FetchTodosData } from '../types/todo.types';
 
 const URLS = {
 	fetchTodos: 'http://localhost:8000/todos',
+	createTodo: 'http://localhost:8000/todos',
 };
 
 export const fetchTodos = () => {
-	return axios.get<TodosData[]>(URLS.fetchTodos);
+	return axios.get<FetchTodosData[]>(URLS.fetchTodos);
 };
 
-export const createTodo = () => {
-	return axios.post();
+export const createTodo = (payload: CreateTodoTypes) => {
+	return axios.post<CreateTodoTypes>(URLS.createTodo, payload);
 };
