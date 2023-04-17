@@ -1,6 +1,12 @@
 import crypto from 'crypto';
 
-const TODOS = [
+type TODOS = {
+	id: string;
+	todo: string;
+	completed: Boolean;
+};
+
+const todos: TODOS[] = [
 	{
 		id: crypto.randomUUID(),
 		todo: 'Learn TypeScript',
@@ -23,4 +29,4 @@ const TODOS = [
 	},
 ];
 
-export default TODOS;
+export default todos;
