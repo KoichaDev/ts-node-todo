@@ -1,16 +1,24 @@
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useMatch, useNavigate } from 'react-router-dom';
 import ROUTES from '../../constants/routesPath';
 import styles from './Aside.module.scss';
 
 const Aside = () => {
-	const handleLogout = () => {
-		localStorage.setItem(
-			'auth',
-			JSON.stringify({
-				isLoggedIn: false,
-			})
-		);
-	};
+	const navigate = useNavigate();
+	const isMatchedLogoutPathName = useMatch('/dashboard/logout')?.pathname;
+
+	useEffect(() => {
+		if (isMatchedLogoutPathName) {
+			localStorage.setItem(
+				'auth',
+				JSON.stringify({
+					isLoggedIn: false,
+				})
+			);
+			navigate('/');
+		}
+	}, [isMatchedLogoutPathName]);
+
 	return (
 		<aside className={`[ ${styles['aside']} ]`}>
 			<header className={`[ ${styles['nav-menu']} ]`}>
@@ -21,7 +29,6 @@ const Aside = () => {
 							<li key={index}>
 								<Link
 									className='text-lg'
-									onClick={handleLogout}
 									to={path}>
 									{textContent}
 								</Link>

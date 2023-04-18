@@ -6,7 +6,7 @@ type Routes = {
 const ROUTES: Routes[] = [
 	{ textContent: 'Dashboard', path: '/dashboard' },
 	{ textContent: 'Todos', path: '/dashboard/todos' },
-	{ textContent: 'Logout', path: '/' },
+	{ textContent: 'Logout', path: '/dashboard/logout' },
 ];
 
 export default ROUTES;

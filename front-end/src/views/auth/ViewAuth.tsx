@@ -7,8 +7,6 @@ const ViewAuth = () => {
 	const authLocalStorage = localStorage.getItem('auth');
 	const { isLoggedIn } = authLocalStorage ? JSON.parse(authLocalStorage) : { isLoggedIn: false };
 
-	localStorage.setItem('auth', JSON.stringify({ isLoggedIn: false }));
-
 	const navigate = useNavigate();
 	const [isMounted, setIsMounted] = useState(false);
 

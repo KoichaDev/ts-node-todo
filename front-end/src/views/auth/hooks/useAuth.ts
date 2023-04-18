@@ -18,12 +18,6 @@ const useAuthLoginMutation = () => {
 	const { isLoggedIn, setIsLoggedIn } = useContext(authContext);
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		localStorage.getItem('auth') ?? {
-			isLoggedIn: false,
-		};
-	}, [isLoggedIn]);
-
 	// prettier-ignore
 	const loginAuthMutation = useMutation((payload: PayloadAuthMutationType) => {
 			return axios.post(URLS.auth, payload);
