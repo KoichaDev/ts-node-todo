@@ -1,22 +1,24 @@
 import useTodos from './hooks/useTodos';
 import CreateTodo from './CreateTodo';
+import { FetchTodosData } from './types/todo.types';
 
 const ViewTodo = () => {
 	const { getTodos } = useTodos();
 
-	const todos = getTodos().data?.data;
+	const todos: FetchTodosData[] = getTodos().data?.data;
 
 	return (
 		<>
 			<h1 className='text-gray-300'>Todos: </h1>
 			<hr />
 			<ul className='list-style-none'>
-				{todos?.map(({ id, todo }) => {
+				{todos?.map(({ id, todo, completed }) => {
 					return (
 						<li
 							key={id}
 							className='text-gray-300'>
 							{todo}
+							{completed ? '✅' : '❌'}
 						</li>
 					);
 				})}

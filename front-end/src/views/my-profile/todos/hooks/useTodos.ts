@@ -1,12 +1,13 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { CreateTodoTypes } from '../types/todo.types';
 import { fetchTodos, createTodo, deleteTodo } from '../services/todoService';
+import { AxiosResponse, AxiosError } from 'axios';
 
 const useTodos = () => {
 	const queryClient = useQueryClient();
 
 	const getTodos = () => {
-		return useQuery({
+		return useQuery<AxiosResponse, AxiosError>({
 			queryKey: ['todos'],
 			queryFn: fetchTodos,
 		});

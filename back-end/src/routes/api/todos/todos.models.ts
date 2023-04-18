@@ -15,7 +15,7 @@ const todos: TODOS[] = [
 	{
 		id: crypto.randomUUID(),
 		todo: 'Learn JavaScript',
-		completed: false,
+		completed: true,
 	},
 	{
 		id: crypto.randomUUID(),
