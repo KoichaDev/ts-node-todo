@@ -1,0 +1,38 @@
+$colors-yellow: (
+	100: hsl(55, 91.7%, 95.3%),
+	200: hsl(55, 96.7%, 88%),
+	300: hsl(52, 98.3%, 76.9%),
+	400: hsl(50, 97.8%, 63.5%),
+	500: hsl(48, 95.8%, 53.1%),
+	600: hsl(45, 93.4%, 47.5%),
+	700: hsl(41, 96.1%, 40.4%),
+	800: hsl(35.5, 91.7%, 32.9%),
+	900: hsl(31, 81%, 28.8%),
+	999: hsl(28, 72.5%, 25.7%),
+);
+
+@each $key, $value in $colors-yellow {
+	$number: $key;
+
+	.bg-yellow {
+		&-#{$number} {
+			background-color: $value;
+		}
+	}
+
+	.hover\:bg-yellow-#{$number}:hover {
+		background-color: $value;
+	}
+
+	.text-yellow {
+		&-#{$number} {
+			color: $value;
+		}
+
+		&.hover\:text-yellow:hover {
+			&-#{$number} {
+				color: $value;
+			}
+		}
+	}
+}

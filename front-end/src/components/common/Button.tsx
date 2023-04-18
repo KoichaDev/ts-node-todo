@@ -9,7 +9,7 @@ const VARIANTS = {
 	primary: 'text-white bg-blue-700 hover:bg-blue-800',
 	secondary: '',
 	danger: '.text-white .bg-red-700',
-	warning: '',
+	warning: 'text-white bg-yellow-400 hover:bg-yellow-500',
 	success: '',
 	light: '',
 };
@@ -25,7 +25,6 @@ const StyledButton = styled.button`
 
 const Button = ({ variant, children, ...rest }: ButtonProps) => {
 	const variantClass = VARIANTS[variant];
-
 	return (
 		<StyledButton
 			className={variantClass}

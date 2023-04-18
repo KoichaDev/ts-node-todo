@@ -13,12 +13,6 @@ $colors-emerald: (
 	999: hsl(164, 85.7%, 16.5%),
 );
 
-:root {
-	@each $key, $value in $colors-emerald {
-		--clr-emerald-#{$key}: #{$value};
-	}
-}
-
 @each $key, $value in $colors-emerald {
 	$number: $key;
 

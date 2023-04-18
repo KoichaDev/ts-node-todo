@@ -13,12 +13,6 @@ $colors-cyan: (
 	999: hsl(196, 63.6%, 23.7%),
 );
 
-:root {
-	@each $key, $value in $colors-cyan {
-		--clr-cyan-#{$key}: #{$value};
-	}
-}
-
 @each $key, $value in $colors-cyan {
 	$number: $key;
 

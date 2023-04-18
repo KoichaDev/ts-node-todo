@@ -1,8 +1,10 @@
+@use '@/scss/utilities/colors' as *;
+
 .view-auth {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	min-height: 100dvh;
-	background-color: var(--clr-cool-gray-999);
+	@extend .bg-cool-gray-999;
 }

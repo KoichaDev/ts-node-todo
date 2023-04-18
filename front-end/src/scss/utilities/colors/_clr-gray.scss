@@ -11,12 +11,6 @@ $colors-gray: (
 	999: hsl(240, 5.9%, 10%),
 );
 
-:root {
-	@each $key, $value in $colors-gray {
-		--clr-gray-#{$key}: #{$value};
-	}
-}
-
 @each $key, $value in $colors-gray {
 	$number: $key;
 

@@ -2,12 +2,6 @@ $colors-white: (
 	999: hsl(0, 0%, 100%),
 );
 
-:root {
-	@each $key, $value in $colors-white {
-		--clr-white-#{$key}: #{$value};
-	}
-}
-
 @each $key, $value in $colors-white {
 	$number: $key;
 

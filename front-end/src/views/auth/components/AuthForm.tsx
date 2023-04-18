@@ -82,7 +82,7 @@ const AuthForm = () => {
 			/>
 			<Button
 				type='submit'
-				variant='primary'>
+				variant='warning'>
 				Enter
 			</Button>
 		</form>

@@ -13,12 +13,6 @@ $colors-light-blue: (
 	999: hsl(202, 80.3%, 23.9%),
 );
 
-:root {
-	@each $key, $value in $colors-light-blue {
-		--clr-light-blue-#{$key}: #{$value};
-	}
-}
-
 @each $key, $value in $colors-light-blue {
 	$number: $key;
 

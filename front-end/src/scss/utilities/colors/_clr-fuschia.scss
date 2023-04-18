@@ -13,12 +13,6 @@ $colors-fuschia: (
 	999: hsl(297, 63.6%, 28%),
 );
 
-:root {
-	@each $key, $value in $colors-fuschia {
-		--clr-fuschia-#{$key}: #{$value};
-	}
-}
-
 @each $key, $value in $colors-fuschia {
 	$number: $key;
 

@@ -13,12 +13,6 @@ $colors-pink: (
 	999: hsl(336, 69%, 30.4%),
 );
 
-:root {
-	@each $key, $value in $colors-pink {
-		--clr-pink-#{$key}: #{$value};
-	}
-}
-
 @each $key, $value in $colors-pink {
 	$number: $key;
 

@@ -13,12 +13,6 @@ $colors-lime: (
 	999: hsl(88, 61.2%, 20.2%),
 );
 
-:root {
-	@each $key, $value in $colors-lime {
-		--clr-lime-#{$key}: #{$value};
-	}
-}
-
 @each $key, $value in $colors-lime {
 	$number: $key;
 

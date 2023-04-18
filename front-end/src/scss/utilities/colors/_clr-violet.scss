@@ -11,12 +11,6 @@ $colors-violet: (
 	999: hsl(264, 67.4%, 34.9%),
 );
 
-:root {
-	@each $key, $value in $colors-violet {
-		--clr-violet-#{$key}: #{$value};
-	}
-}
-
 @each $key, $value in $colors-violet {
 	$number: $key;
 
