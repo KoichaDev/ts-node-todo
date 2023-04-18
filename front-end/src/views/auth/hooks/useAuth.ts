@@ -1,9 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
-import { useContext, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { authContext } from '@/context/auth-provider';
 
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 type PayloadAuthMutationType = {
 	username: string;
@@ -14,12 +14,22 @@ const URLS = {
 	auth: 'http://localhost:8000/auth',
 };
 
+type ErrorMessage = {
+	response: {
+		data: {
+			error: {
+				message: string;
+			};
+		};
+	};
+};
+
 const useAuthLoginMutation = () => {
 	const { isLoggedIn, setIsLoggedIn } = useContext(authContext);
 	const navigate = useNavigate();
 
 	// prettier-ignore
-	const loginAuthMutation = useMutation((payload: PayloadAuthMutationType) => {
+	const loginAuthMutation = useMutation<AxiosResponse, AxiosResponse & ErrorMessage, PayloadAuthMutationType>((payload: PayloadAuthMutationType) => {
 			return axios.post(URLS.auth, payload);
 		},
 		{

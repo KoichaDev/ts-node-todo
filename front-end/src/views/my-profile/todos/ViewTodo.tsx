@@ -8,9 +8,17 @@ const ViewTodo = () => {
 
 	return (
 		<>
+			<h1 className='text-gray-300'>Todos: </h1>
+			<hr />
 			<ul className='list-style-none'>
 				{todos?.map(({ id, todo }) => {
-					return <li key={id}>{todo}</li>;
+					return (
+						<li
+							key={id}
+							className='text-gray-300'>
+							{todo}
+						</li>
+					);
 				})}
 			</ul>
 
