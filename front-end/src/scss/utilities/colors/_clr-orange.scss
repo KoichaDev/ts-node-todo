@@ -26,12 +26,10 @@ $colors-orange: (
 		&-#{$number} {
 			background-color: $value;
 		}
+	}
 
-		&.hover\:bg-orange:hover {
-			&-#{$number} {
-				background-color: $value;
-			}
-		}
+	.hover\:bg-orange-#{$number}:hover {
+		background-color: $value;
 	}
 
 	.text-orange {

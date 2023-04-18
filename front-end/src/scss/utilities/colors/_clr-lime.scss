@@ -26,12 +26,10 @@ $colors-lime: (
 		&-#{$number} {
 			background-color: $value;
 		}
+	}
 
-		&.hover\:bg-lime:hover {
-			&-#{$number} {
-				background-color: $value;
-			}
-		}
+	.hover\:bg-lime-#{$number}:hover {
+		background-color: $value;
 	}
 
 	.text-lime {

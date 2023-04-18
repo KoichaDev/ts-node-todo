@@ -6,9 +6,9 @@ type ButtonProps = {
 };
 
 const VARIANTS = {
-	primary: 'text-white bg-blue-700',
+	primary: 'text-white bg-blue-700 hover:bg-blue-800',
 	secondary: '',
-	danger: '',
+	danger: '.text-white .bg-red-700',
 	warning: '',
 	success: '',
 	light: '',
@@ -18,7 +18,6 @@ const StyledButton = styled.button`
 	padding: 1em 2em;
 	font-weight: var(--fw-700);
 	text-decoration: none;
-	background: transparent;
 	border: 0;
 	border-radius: 0.5em;
 	cursor: pointer;

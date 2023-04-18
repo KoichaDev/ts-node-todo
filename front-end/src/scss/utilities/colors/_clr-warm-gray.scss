@@ -24,12 +24,10 @@ $colors-warm-gray: (
 		&-#{$number} {
 			background-color: $value;
 		}
+	}
 
-		.hover\:bg-warm-gray:hover {
-			&-#{$number} {
-				background-color: $value;
-			}
-		}
+	.hover\:bg-warm-gray-#{$number}:hover {
+		background-color: $value;
 	}
 
 	.text-warm-gray {

@@ -24,12 +24,10 @@ $colors-violet: (
 		&-#{$number} {
 			background-color: $value;
 		}
+	}
 
-		&.hover\:bg-violet:hover {
-			&-#{$number} {
-				background-color: $value;
-			}
-		}
+	.hover\:bg-violet-#{$number}:hover {
+		background-color: $value;
 	}
 
 	.text-violet {

@@ -26,12 +26,10 @@ $colors-pink: (
 		&-#{$number} {
 			background-color: $value;
 		}
+	}
 
-		&.hover\:bg-pink:hover {
-			&-#{$number} {
-				color: $value;
-			}
-		}
+	.hover\:bg-pink-#{$number}:hover {
+		background-color: $value;
 	}
 
 	.text-pink {

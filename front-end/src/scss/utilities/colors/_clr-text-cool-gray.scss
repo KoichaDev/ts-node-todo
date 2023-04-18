@@ -24,12 +24,10 @@ $colors-cool-gray: (
 		&-#{$number} {
 			background-color: $value;
 		}
+	}
 
-		&.hover\:bg-cool-gray:hover {
-			&-#{$number} {
-				background-color: $value;
-			}
-		}
+	.hover\:bg-cool-gray-#{$number}:hover {
+		background-color: $value;
 	}
 
 	.text-cool-gray {

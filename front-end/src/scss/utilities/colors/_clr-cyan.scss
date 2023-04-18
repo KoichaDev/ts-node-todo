@@ -26,12 +26,10 @@ $colors-cyan: (
 		&-#{$number} {
 			background-color: $value;
 		}
+	}
 
-		&.hover\:bg-cyan:hover {
-			&-#{$number} {
-				background-color: $value;
-			}
-		}
+	.hover\:bg-cyan-#{$number}:hover {
+		background-color: $value;
 	}
 
 	.text-cyan {

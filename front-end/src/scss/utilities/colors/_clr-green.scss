@@ -26,12 +26,10 @@ $colors-green: (
 		&-#{$number} {
 			background-color: $value;
 		}
+	}
 
-		&.hover\:bg-green:hover {
-			&-#{$number} {
-				background-color: $value;
-			}
-		}
+	.hover\:bg-green-#{$number}:hover {
+		background-color: $value;
 	}
 
 	.text-green {

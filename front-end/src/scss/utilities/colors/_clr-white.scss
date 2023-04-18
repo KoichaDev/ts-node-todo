@@ -1,0 +1,35 @@
+$colors-white: (
+	999: hsl(0, 0%, 100%),
+);
+
+:root {
+	@each $key, $value in $colors-white {
+		--clr-white-#{$key}: #{$value};
+	}
+}
+
+@each $key, $value in $colors-white {
+	$number: $key;
+
+	.bg-white {
+		&-#{$number} {
+			background-color: $value;
+		}
+	}
+
+	.hover\:bg-white-#{$number}:hover {
+		background-color: $value;
+	}
+
+	.text-white {
+		&-#{$number} {
+			color: $value;
+		}
+
+		&.hover\:text-white:hover {
+			&-#{$number} {
+				color: $value;
+			}
+		}
+	}
+}

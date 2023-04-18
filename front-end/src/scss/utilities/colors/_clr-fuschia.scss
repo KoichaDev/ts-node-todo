@@ -26,12 +26,10 @@ $colors-fuschia: (
 		&-#{$number} {
 			background-color: $value;
 		}
+	}
 
-		&.hover\:bg-fuschia:hover {
-			&-#{$number} {
-				background-color: $value;
-			}
-		}
+	.hover\:bg-fuschia-#{$number}:hover {
+		background-color: $value;
 	}
 
 	.text-fuschia {

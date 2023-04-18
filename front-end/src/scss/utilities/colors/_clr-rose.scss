@@ -26,12 +26,10 @@ $colors-rose: (
 		&-#{$number} {
 			background-color: $value;
 		}
+	}
 
-		&.hover\:bg-rose:hover {
-			&-#{$number} {
-				background-color: $value;
-			}
-		}
+	.hover\:bg-rose-#{$number}:hover {
+		background-color: $value;
 	}
 
 	.text-rose {
