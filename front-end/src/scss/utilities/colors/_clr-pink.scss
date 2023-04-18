@@ -1,0 +1,36 @@
+@use 'sass:string';
+
+$colors-pink: (
+	100: hsl(327, 73.3%, 97.1%),
+	200: hsl(326, 77.8%, 94.7%),
+	300: hsl(326, 84.6%, 89.8%),
+	400: hsl(353, 95.7%, 81.8%),
+	500: hsl(329, 85.5%, 70.2%),
+	600: hsl(350, 89.2%, 60.2%),
+	700: hsl(333, 71.4%, 50.6%),
+	800: hsl(335, 77.6%, 42%),
+	900: hsl(336, 74.4%, 35.3%),
+	999: hsl(336, 69%, 30.4%),
+);
+
+:root {
+	@each $key, $value in $colors-pink {
+		--clr-pink-#{$key}: #{$value};
+	}
+}
+
+@each $key, $value in $colors-pink {
+	$number: $key;
+
+	.bg-pink {
+		&-#{$number} {
+			background-color: $value;
+		}
+	}
+
+	.text-pink {
+		&-#{$number} {
+			color: $value;
+		}
+	}
+}
