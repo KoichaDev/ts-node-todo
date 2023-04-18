@@ -1,0 +1,7 @@
+.dashboard-layout {
+	display: grid;
+	grid-template-columns: 0.25fr 1.5fr;
+	grid-template-areas:
+		'aside main'
+		'aside main';
+}

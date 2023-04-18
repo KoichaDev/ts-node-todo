@@ -12,7 +12,7 @@ const DeleteTodo = () => {
 	};
 
 	return (
-		<ul>
+		<ul className='list-style-none'>
 			{todos?.map(({ id, todo }) => {
 				return (
 					<li key={id}>

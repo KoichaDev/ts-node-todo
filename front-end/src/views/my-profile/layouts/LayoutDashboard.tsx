@@ -1,6 +1,6 @@
-import { Outlet } from 'react-router-dom';
-
-import Header from '../components/Header';
+import Aside from './components/Aside';
+import Main from './components/Main';
+import styles from './LayoutDashboard.module.scss';
 
 type LayoutDashboardProps = {
 	children: React.ReactNode;
@@ -8,10 +8,10 @@ type LayoutDashboardProps = {
 
 const LayoutDashboard = ({ children }: LayoutDashboardProps) => {
 	return (
-		<main>
-			<Header />
-			<Outlet />
-		</main>
+		<div className={`[ ${styles['dashboard-layout']} ]`}>
+			<Aside />
+			<Main>{children}</Main>
+		</div>
 	);
 };
 

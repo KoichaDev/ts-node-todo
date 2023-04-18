@@ -1,0 +1,9 @@
+.grid-flow {
+	display: grid;
+	gap: var(--gap, 1em);
+}
+
+.grid-flow\! {
+	display: grid !important;
+	gap: var(--gap, 1em) !important;
+}

@@ -6,13 +6,11 @@ const ViewTodo = () => {
 	const todos = getTodos().data?.data;
 
 	return (
-		<>
-			<ul>
-				{todos?.map(({ id, todo }) => {
-					return <li key={id}>{todo}</li>;
-				})}
-			</ul>
-		</>
+		<ul className='list-style-none'>
+			{todos?.map(({ id, todo }) => {
+				return <li key={id}>{todo}</li>;
+			})}
+		</ul>
 	);
 };
 

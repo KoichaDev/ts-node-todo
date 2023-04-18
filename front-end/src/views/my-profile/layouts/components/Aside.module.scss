@@ -1,0 +1,17 @@
+.aside {
+	grid-area: aside;
+	display: flex;
+	flex-direction: column;
+	padding: 2em;
+	min-height: 100dvh;
+	overflow-y: visible;
+	background: var(--clr-cool-gray-900);
+
+	.nav-menu > menu {
+		list-style: none;
+	}
+
+	* {
+		color: var(--clr-blue-gray-400);
+	}
+}

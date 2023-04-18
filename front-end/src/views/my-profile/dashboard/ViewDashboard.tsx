@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Header from '../components/Header';
+import LayoutDashboard from '../layouts/LayoutDashboard';
 import ViewTodo from '../todos/ViewTodo';
 import CreateTodo from '../todos/CreateTodo';
 import DeleteTodo from '../todos/DeleteTodo';
@@ -26,11 +26,11 @@ const ViewDashboard = () => {
 	}, [isMounted]);
 
 	return (
-		<main>
-			<Header />
+		<LayoutDashboard>
+			<ViewTodo />
 			<DeleteTodo />
 			<CreateTodo />
-		</main>
+		</LayoutDashboard>
 	);
 };
 
