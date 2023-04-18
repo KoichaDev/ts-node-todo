@@ -1,6 +1,8 @@
+@use '@/scss/utilities/colors' as *;
+
 .main {
 	grid-area: main;
 	padding: 2em;
 	padding-left: 5em;
-	background-color: var(--clr-cool-gray-999);
+	@extend .bg-cool-gray-999;
 }
