@@ -1,6 +1,7 @@
 import { useState, useId } from 'react';
 import useAuthLoginMutation from '../hooks/useAuth';
 
+import Button from '@/components/common/Button';
 import styles from './AuthForm.module.scss';
 
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
@@ -68,7 +69,7 @@ const AuthForm = () => {
 
 			<label
 				htmlFor={passwordId}
-				className='text-lg clr-text-gray-400'>
+				className='text-lg clr-text-gray-400 text-red-900'>
 				Password
 			</label>
 
@@ -79,7 +80,11 @@ const AuthForm = () => {
 				onChange={handleChangePassword}
 				placeholder='password...'
 			/>
-			<button type='submit'>Enter</button>
+			<Button
+				type='submit'
+				className='mt-10'>
+				Enter
+			</Button>
 		</form>
 	);
 };
