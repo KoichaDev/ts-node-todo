@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import ViewTodo from '../todos/ViewTodo';
 import CreateTodo from '../todos/CreateTodo';
+import DeleteTodo from '../todos/DeleteTodo';
 
 const ViewDashboard = () => {
 	const navigate = useNavigate();
@@ -25,11 +26,11 @@ const ViewDashboard = () => {
 	}, [isMounted]);
 
 	return (
-		<>
+		<main>
 			<Header />
-			<ViewTodo />
+			<DeleteTodo />
 			<CreateTodo />
-		</>
+		</main>
 	);
 };
 

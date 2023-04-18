@@ -2,6 +2,10 @@ import crypto from 'crypto';
 import { Request, Response } from 'express';
 import TODOS from './todos.models';
 
+type TodoParamsId = {
+	id: string;
+};
+
 type CreateTodo = {
 	todo: string;
 	completed: false;
@@ -31,12 +35,34 @@ const createTodo = (req: Request<{}, {}, CreateTodo>, res: Response) => {
 
 	TODOS.push(payload);
 
-	console.log(TODOS);
-
 	res.send({
-		status: 200,
+		status: 201,
 		message: `${todo} has been created`,
 	});
 };
 
-export { getTodos, createTodo };
+const deleteTodo = (req: Request<TodoParamsId, {}>, res: Response) => {
+	const paramsId = req.params.id;
+
+	const hasId = TODOS.find((todo) => todo.id === paramsId);
+
+	if (!hasId) {
+		return res.status(422).send({
+			status: 422,
+			error: {
+				message: 'Invalid ID',
+			},
+		});
+	}
+
+	const index = TODOS.findIndex((todo) => todo.id === paramsId);
+
+	TODOS.splice(index, 1);
+
+	return res.send({
+		status: 200,
+		message: `Deleted`,
+	});
+};
+
+export { getTodos, createTodo, deleteTodo };
