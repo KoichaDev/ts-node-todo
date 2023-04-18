@@ -21,7 +21,7 @@ const ViewAuth = () => {
 
 	return (
 		<main className={`[ ${styles['view-auth']} ]`}>
-			<h1 className='mb-2 text-4xl clr-text-gray-400'>👨‍💻 Login</h1>
+			<h1 className='mb-2 text-4xl text-gray-400'>👨‍💻 Login</h1>
 			{!isLoggedIn && <AuthForm />}
 		</main>
 	);

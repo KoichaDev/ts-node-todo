@@ -56,7 +56,7 @@ const AuthForm = () => {
 			onSubmit={handleSubmit}>
 			<label
 				htmlFor={usernameId}
-				className='text-lg clr-text-gray-400'>
+				className='text-lg text-gray-400'>
 				Username:{' '}
 			</label>
 			<input
@@ -69,7 +69,7 @@ const AuthForm = () => {
 
 			<label
 				htmlFor={passwordId}
-				className='text-lg clr-text-gray-400 text-red-900'>
+				className='text-lg text-gray-400 text-red-900'>
 				Password
 			</label>
 
