@@ -3,12 +3,10 @@ import useTodos from './hooks/useTodos';
 const DeleteTodo = () => {
 	const { getTodos, deleteTodoMutation } = useTodos();
 
-	const { mutate } = deleteTodoMutation;
-
 	const todos = getTodos().data?.data;
 
 	const handleDeleteTodo = (id: string) => {
-		mutate(id);
+		deleteTodoMutation.mutate(id);
 	};
 
 	return (

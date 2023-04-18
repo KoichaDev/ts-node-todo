@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { authContext } from '@/context/auth-provider';
 
 import axios from 'axios';
@@ -20,7 +20,7 @@ const useAuthLoginMutation = () => {
 
 	useEffect(() => {
 		localStorage.getItem('auth') ?? {
-			isLoggedIn,
+			isLoggedIn: false,
 		};
 	}, [isLoggedIn]);
 

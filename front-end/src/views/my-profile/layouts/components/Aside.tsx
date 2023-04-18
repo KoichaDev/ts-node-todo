@@ -1,10 +1,8 @@
 import { Link } from 'react-router-dom';
-
+import ROUTES from '../../constants/routesPath';
 import styles from './Aside.module.scss';
 
 const Aside = () => {
-	const routes = [{ textContent: 'Logout', path: '/' }];
-
 	const handleLogout = () => {
 		localStorage.setItem(
 			'auth',
@@ -17,12 +15,12 @@ const Aside = () => {
 		<aside className={`[ ${styles['aside']} ]`}>
 			<header className={`[ ${styles['nav-menu']} ]`}>
 				<menu>
-					{routes.map((route, index) => {
+					{ROUTES.map((route, index) => {
 						const { textContent, path } = route;
 						return (
 							<li key={index}>
 								<Link
-									className='nav-menu__link'
+									className='text-lg'
 									onClick={handleLogout}
 									to={path}>
 									{textContent}

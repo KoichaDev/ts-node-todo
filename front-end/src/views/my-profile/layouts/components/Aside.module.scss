@@ -7,11 +7,14 @@
 	overflow-y: visible;
 	background: var(--clr-cool-gray-900);
 
-	.nav-menu > menu {
-		list-style: none;
-	}
-
 	* {
 		color: var(--clr-blue-gray-400);
+	}
+
+	.nav-menu > menu {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5em;
+		list-style: none;
 	}
 }
