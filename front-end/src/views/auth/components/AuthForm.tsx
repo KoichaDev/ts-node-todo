@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useId } from 'react';
 import useAuthLoginMutation from '../hooks/useAuth';
+
+import styles from './AuthForm.module.scss';
 
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
@@ -16,6 +18,9 @@ const initState: Auth = {
 const AuthForm = () => {
 	const [auth, setAuth] = useState(initState);
 	const { loginAuthMutation } = useAuthLoginMutation();
+
+	const usernameId = useId();
+	const passwordId = useId();
 
 	const handleChangeUsername = (e: ChangeEvent) => {
 		const enteredUsername = e.target.value;
@@ -45,16 +50,31 @@ const AuthForm = () => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
+		<form
+			className={`${styles['auth-form']}`}
+			onSubmit={handleSubmit}>
+			<label
+				htmlFor={usernameId}
+				className='text-lg clr-text-gray-400'>
+				Username:{' '}
+			</label>
 			<input
 				type='text'
+				id={usernameId}
 				value={auth.username}
 				onChange={handleChangeUsername}
 				placeholder='username...'
 			/>
 
+			<label
+				htmlFor={passwordId}
+				className='text-lg clr-text-gray-400'>
+				Password
+			</label>
+
 			<input
 				type='password'
+				id={passwordId}
 				value={auth.password}
 				onChange={handleChangePassword}
 				placeholder='password...'
