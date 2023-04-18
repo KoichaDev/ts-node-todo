@@ -26,11 +26,23 @@ $colors-lime: (
 		&-#{$number} {
 			background-color: $value;
 		}
+
+		&.hover\:bg-lime:hover {
+			&-#{$number} {
+				background-color: $value;
+			}
+		}
 	}
 
 	.text-lime {
 		&-#{$number} {
 			color: $value;
+		}
+
+		&.hover\:text-lime:hover {
+			&-#{$number} {
+				color: $value;
+			}
 		}
 	}
 }

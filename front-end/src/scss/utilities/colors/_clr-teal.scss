@@ -26,11 +26,23 @@ $colors-teal: (
 		&-#{$number} {
 			background-color: $value;
 		}
+
+		&.hover\:bg-teal:hover {
+			&-#{$number} {
+				background-color: $value;
+			}
+		}
 	}
 
 	.text-teal {
 		&-#{$number} {
 			color: $value;
+		}
+
+		&.hover\:text-teal:hover {
+			&-#{$number} {
+				color: $value;
+			}
 		}
 	}
 }

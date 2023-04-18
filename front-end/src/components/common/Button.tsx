@@ -6,7 +6,7 @@ type ButtonProps = {
 };
 
 const VARIANTS = {
-	primary: '',
+	primary: 'text-white bg-blue-700',
 	secondary: '',
 	danger: '',
 	warning: '',

@@ -26,11 +26,23 @@ $colors-light-blue: (
 		&-#{$number} {
 			background-color: $value;
 		}
+
+		&.hover\:bg-light-blue:hover {
+			&-#{$number} {
+				background-color: $value;
+			}
+		}
 	}
 
 	.text-light-blue {
 		&-#{$number} {
 			color: $value;
+		}
+
+		&.hover\:text-light-blue:hover {
+			&-#{$number} {
+				color: $value;
+			}
 		}
 	}
 }

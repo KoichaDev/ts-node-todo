@@ -26,11 +26,23 @@ $colors-purple: (
 		&-#{$number} {
 			background-color: $value;
 		}
+
+		&.hover\:bg-purple:hover {
+			&-#{$number} {
+				background-color: $value;
+			}
+		}
 	}
 
 	.text-purple {
 		&-#{$number} {
 			color: $value;
+		}
+
+		&.hover\:text-purple:hover {
+			&-#{$number} {
+				color: $value;
+			}
 		}
 	}
 }

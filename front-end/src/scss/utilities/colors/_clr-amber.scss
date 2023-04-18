@@ -26,11 +26,23 @@ $colors-amber: (
 		&-#{$number} {
 			background-color: $value;
 		}
+
+		&.hover\:bg-amber:hover {
+			&-#{$number} {
+				background-color: $value;
+			}
+		}
 	}
 
 	.text-amber {
 		&-#{$number} {
 			color: $value;
+		}
+
+		&.hover\:text-amber:hover {
+			&-#{$number} {
+				color: $value;
+			}
 		}
 	}
 }

@@ -82,7 +82,8 @@ const AuthForm = () => {
 			/>
 			<Button
 				type='submit'
-				className='mt-10'>
+				className='mt-10'
+				variant='primary'>
 				Enter
 			</Button>
 		</form>

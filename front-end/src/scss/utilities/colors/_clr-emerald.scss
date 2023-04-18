@@ -26,11 +26,23 @@ $colors-emerald: (
 		&-#{$number} {
 			background-color: $value;
 		}
+
+		&.hover\:bg-emerald:hover {
+			&-#{$number} {
+				background-color: $value;
+			}
+		}
 	}
 
 	.text-emerald {
 		&-#{$number} {
 			color: $value;
+		}
+
+		&.hover\:text-emerald:hover {
+			&-#{$number} {
+				color: $value;
+			}
 		}
 	}
 }
