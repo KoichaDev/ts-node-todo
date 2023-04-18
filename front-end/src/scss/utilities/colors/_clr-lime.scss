@@ -1,0 +1,36 @@
+@use 'sass:string';
+
+$colors-lime: (
+	100: hsl(78, 92%, 95.1%),
+	200: hsl(80, 89.1%, 89.2%),
+	300: hsl(81, 88.5%, 79.6%),
+	400: hsl(82, 84.5%, 67.1%),
+	500: hsl(83, 78%, 55.5%),
+	600: hsl(84, 80.5%, 44.3%),
+	700: hsl(85, 85.2%, 34.5%),
+	800: hsl(86, 78.4%, 27.3%),
+	900: hsl(86, 69%, 22.7%),
+	999: hsl(88, 61.2%, 20.2%),
+);
+
+:root {
+	@each $key, $value in $colors-lime {
+		--clr-lime-#{$key}: #{$value};
+	}
+}
+
+@each $key, $value in $colors-lime {
+	$number: $key;
+
+	.bg-lime {
+		&-#{$number} {
+			background-color: $value;
+		}
+	}
+
+	.text-lime {
+		&-#{$number} {
+			color: $value;
+		}
+	}
+}

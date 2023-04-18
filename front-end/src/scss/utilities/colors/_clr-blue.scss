@@ -1,0 +1,36 @@
+@use 'sass:string';
+
+$colors-blue: (
+	100: hsl(214, 100%, 96.9%),
+	200: hsl(214, 94.6%, 92.7%),
+	300: hsl(213, 96.9%, 87.3%),
+	400: hsl(212, 96.4%, 78.4%),
+	500: hsl(213, 93.9%, 67.8%),
+	600: hsl(217, 91.2%, 59.8%),
+	700: hsl(221, 83.2%, 53.3%),
+	800: hsl(224, 76.3%, 48%),
+	900: hsl(226, 70.7%, 40.2%),
+	999: hsl(224, 64.3%, 32.9%),
+);
+
+:root {
+	@each $key, $value in $colors-blue {
+		--clr-blue-#{$key}: #{$value};
+	}
+}
+
+@each $key, $value in $colors-blue {
+	$number: $key;
+
+	.bg-blue {
+		&-#{$number} {
+			background-color: $value;
+		}
+	}
+
+	.text-blue {
+		&-#{$number} {
+			color: $value;
+		}
+	}
+}

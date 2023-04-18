@@ -1,0 +1,36 @@
+@use 'sass:string';
+
+$colors-cyan: (
+	100: hsl(183, 100%, 96.3%),
+	200: hsl(185, 95.9%, 90.4%),
+	300: hsl(186, 93.5%, 81.8%),
+	400: hsl(187, 92.4%, 69%),
+	500: hsl(188, 85.7%, 53.3%),
+	600: hsl(189, 94.5%, 42.7%),
+	700: hsl(192, 91.4%, 36.5%),
+	800: hsl(193, 82.3%, 31%),
+	900: hsl(194, 69.6%, 27.1%),
+	999: hsl(196, 63.6%, 23.7%),
+);
+
+:root {
+	@each $key, $value in $colors-cyan {
+		--clr-cyan-#{$key}: #{$value};
+	}
+}
+
+@each $key, $value in $colors-cyan {
+	$number: $key;
+
+	.bg-cyan {
+		&-#{$number} {
+			background-color: $value;
+		}
+	}
+
+	.text-cyan {
+		&-#{$number} {
+			color: $value;
+		}
+	}
+}

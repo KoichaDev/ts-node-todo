@@ -1,0 +1,36 @@
+@use 'sass:string';
+
+$colors-orange: (
+	100: hsl(33, 100%, 96.5%),
+	200: hsl(34, 100%, 91.8%),
+	300: hsl(32, 97.7%, 83.1%),
+	400: hsl(31, 97.2%, 72.4%),
+	500: hsl(27, 96%, 61%),
+	600: hsl(25, 95%, 53.1%),
+	700: hsl(21, 90.2%, 48.2%),
+	800: hsl(18, 88.3%, 40.4%),
+	900: hsl(15, 79.1%, 33.7%),
+	999: hsl(15, 74.6%, 27.8%),
+);
+
+:root {
+	@each $key, $value in $colors-orange {
+		--clr-orange-#{$key}: #{$value};
+	}
+}
+
+@each $key, $value in $colors-orange {
+	$number: $key;
+
+	.bg-orange {
+		&-#{$number} {
+			background-color: $value;
+		}
+	}
+
+	.text-orange {
+		&-#{$number} {
+			color: $value;
+		}
+	}
+}

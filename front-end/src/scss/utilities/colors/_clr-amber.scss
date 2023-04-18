@@ -1,0 +1,36 @@
+@use 'sass:string';
+
+$colors-amber: (
+	100: hsl(48, 100%, 96.1%),
+	200: hsl(48, 96.5%, 88.8%),
+	300: hsl(48, 96.6%, 76.7%),
+	400: hsl(45, 96.7%, 64.5%),
+	500: hsl(43, 96.4%, 56.3%),
+	600: hsl(38, 92.1%, 50.2%),
+	700: hsl(32, 94.6%, 43.7%),
+	800: hsl(26, 90.5%, 37.1%),
+	900: hsl(23, 82.5%, 31.4%),
+	999: hsl(22, 77.8%, 26.5%),
+);
+
+:root {
+	@each $key, $value in $colors-amber {
+		--clr-amber-#{$key}: #{$value};
+	}
+}
+
+@each $key, $value in $colors-amber {
+	$number: $key;
+
+	.bg-amber {
+		&-#{$number} {
+			background-color: $value;
+		}
+	}
+
+	.text-amber {
+		&-#{$number} {
+			color: $value;
+		}
+	}
+}

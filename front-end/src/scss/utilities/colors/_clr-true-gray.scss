@@ -1,0 +1,34 @@
+$colors-true-gray: (
+	100: hsl(0, 0%, 98%),
+	200: hsl(0, 0%, 96.1%),
+	300: hsl(0, 0%, 89.8%),
+	400: hsl(0, 0%, 83.1%),
+	500: hsl(0, 0%, 63.9%),
+	600: hsl(0, 0%, 45.1%),
+	700: hsl(0, 0%, 32.2%),
+	800: hsl(0, 0%, 25.1%),
+	900: hsl(0, 0%, 14.9%),
+	999: hsl(0, 0%, 9%),
+);
+
+:root {
+	@each $key, $value in $colors-true-gray {
+		--clr-true-gray-#{$key}: #{$value};
+	}
+}
+
+@each $key, $value in $colors-true-gray {
+	$number: $key;
+
+	.bg-true-gray {
+		&-#{$number} {
+			background-color: $value;
+		}
+	}
+
+	.text-true-gray {
+		&-#{$number} {
+			color: $value;
+		}
+	}
+}

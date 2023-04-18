@@ -1,0 +1,36 @@
+@use 'sass:string';
+
+$colors-teal: (
+	100: hsl(166, 76.5%, 96.7%),
+	200: hsl(167, 85.5%, 89.2%),
+	300: hsl(168, 83.8%, 78.2%),
+	400: hsl(171, 76.9%, 64.3%),
+	500: hsl(173, 66%, 50.4%),
+	600: hsl(173, 80.4%, 40%),
+	700: hsl(175, 83.9%, 31.6%),
+	800: hsl(175, 77.4%, 26.1%),
+	900: hsl(176, 69.4%, 21.8%),
+	999: hsl(176, 60.8%, 19%),
+);
+
+:root {
+	@each $key, $value in $colors-teal {
+		--clr-teal-#{$key}: #{$value};
+	}
+}
+
+@each $key, $value in $colors-teal {
+	$number: $key;
+
+	.bg-teal {
+		&-#{$number} {
+			background-color: $value;
+		}
+	}
+
+	.text-teal {
+		&-#{$number} {
+			color: $value;
+		}
+	}
+}
