@@ -1,11 +1,10 @@
 import useTodos from './hooks/useTodos';
 import CreateTodo from './CreateTodo';
-import { FetchTodosData } from './types/todo.types';
 
 const ViewTodo = () => {
 	const { getTodos } = useTodos();
 
-	const todos: FetchTodosData[] = getTodos().data?.data;
+	const { data: todos } = getTodos();
 
 	return (
 		<>

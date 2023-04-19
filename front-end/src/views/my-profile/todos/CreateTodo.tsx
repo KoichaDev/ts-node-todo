@@ -1,5 +1,5 @@
 import { useId, useState } from 'react';
-import { CreateTodoTypes } from './types/todo.types';
+import { CreateTodo } from './types/todo.types';
 import useTodos from './hooks/useTodos';
 
 const initState = {
@@ -8,7 +8,7 @@ const initState = {
 };
 
 const CreateTodo = () => {
-	const [todo, setTodo] = useState<CreateTodoTypes>(initState);
+	const [todo, setTodo] = useState<CreateTodo>(initState);
 	const inputTextId = useId();
 	const toggleId = useId();
 
