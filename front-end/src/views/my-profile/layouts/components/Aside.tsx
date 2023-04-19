@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link, useMatch, useNavigate } from 'react-router-dom';
-import ROUTES from '../../constants/routesPath';
+import ROUTES from './constants/routesPath';
 import styles from './Aside.module.scss';
 
 const Aside = () => {

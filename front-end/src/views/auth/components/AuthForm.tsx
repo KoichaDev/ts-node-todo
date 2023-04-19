@@ -21,6 +21,8 @@ const initState: Auth = {
 
 const AuthForm = () => {
 	const [auth, setAuth] = useState(initState);
+	const [isInputFocused, setIsInputFocused] = useState(false);
+
 	const { loginAuthMutation } = useAuthLoginMutation();
 
 	const usernameId = useId();
@@ -28,6 +30,8 @@ const AuthForm = () => {
 
 	const isError = loginAuthMutation.isError;
 	const errorMessage = loginAuthMutation.error?.response.data.error.message;
+
+	const textErrorClassName = isError && !isInputFocused ? 'text-red-400' : 'text-gray-400';
 
 	useEffect(() => {
 		if (errorMessage !== undefined) {
@@ -78,7 +82,7 @@ const AuthForm = () => {
 				onSubmit={handleSubmit}>
 				<label
 					htmlFor={usernameId}
-					className='text-lg text-gray-400'>
+					className={`text-lg ${textErrorClassName}`}>
 					Username:{' '}
 				</label>
 				<Input
@@ -87,11 +91,14 @@ const AuthForm = () => {
 					value={auth.username}
 					onChange={handleChangeUsername}
 					placeholder='username...'
+					error={isError && !isInputFocused}
+					onFocus={() => setIsInputFocused(true)}
+					onBlur={() => setIsInputFocused(false)}
 				/>
 
 				<label
 					htmlFor={passwordId}
-					className='text-lg text-gray-400 text-red-900'>
+					className={`text-lg ${textErrorClassName}`}>
 					Password
 				</label>
 
@@ -101,6 +108,9 @@ const AuthForm = () => {
 					value={auth.password}
 					onChange={handleChangePassword}
 					placeholder='password...'
+					error={isError && !isInputFocused}
+					onFocus={() => setIsInputFocused(true)}
+					onBlur={() => setIsInputFocused(false)}
 				/>
 				<Button
 					type='submit'
