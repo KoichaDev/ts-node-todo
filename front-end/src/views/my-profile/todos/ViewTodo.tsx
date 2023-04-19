@@ -10,6 +10,9 @@ const ViewTodo = () => {
 		<>
 			<h1 className='text-gray-300'>Todos: </h1>
 			<hr />
+
+			<CreateTodo />
+
 			<ul className='list-style-none'>
 				{todos?.map(({ id, todo, completed }) => {
 					return (
@@ -22,8 +25,6 @@ const ViewTodo = () => {
 					);
 				})}
 			</ul>
-
-			<CreateTodo />
 		</>
 	);
 };

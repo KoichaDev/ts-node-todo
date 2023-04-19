@@ -1,5 +1,6 @@
 import { useId, useState } from 'react';
 import { CreateTodo } from './types/todo.types';
+import Input from '@/components/common/Input';
 import useTodos from './hooks/useTodos';
 
 const initState = {
@@ -37,20 +38,30 @@ const CreateTodo = () => {
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<label htmlFor={inputTextId}>Todo</label>
-			<input
-				type='text'
-				id={inputTextId}
-				value={todo.todo}
-				onChange={handleChangeTodo}
+			<label
+				aria-label='Complete todo task?'
+				aria-describedby={toggleId}
+				className='text-gray-300 text-lg'
 			/>
-
-			<label htmlFor={toggleId}>Complete</label>
-			<input
+			<Input
 				type='checkbox'
 				id={toggleId}
+				className='d-inline-block!'
 				checked={todo.completed}
 				onChange={handleChangeCompleted}
+			/>
+
+			<label
+				aria-label='Add your todo'
+				aria-describedby={inputTextId}
+				className='d-inline-block text-gray-300 text-lg'
+			/>
+			<Input
+				type='text'
+				id={inputTextId}
+				className='d-inline-block!'
+				value={todo.todo}
+				onChange={handleChangeTodo}
 			/>
 
 			<button type='submit'>Add Todo</button>

@@ -1,29 +1,17 @@
-$colors-white: (
-	999: hsl(0, 0%, 100%),
-);
+$colors-white: hsl(0, 0%, 100%);
 
-@each $key, $value in $colors-white {
-	$number: $key;
+.bg-white {
+	background-color: $colors-white;
+}
 
-	.bg-white {
-		&-#{$number} {
-			background-color: $value;
-		}
-	}
+.hover\:bg-white:hover {
+	background-color: $colors-white;
+}
 
-	.hover\:bg-white-#{$number}:hover {
-		background-color: $value;
-	}
+.text-white {
+	color: $colors-white;
 
-	.text-white {
-		&-#{$number} {
-			color: $value;
-		}
-
-		&.hover\:text-white:hover {
-			&-#{$number} {
-				color: $value;
-			}
-		}
+	&.hover\:text-white:hover {
+		color: $colors-white;
 	}
 }
