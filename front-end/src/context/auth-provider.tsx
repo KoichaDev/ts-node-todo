@@ -13,7 +13,6 @@ const AuthContext = createContext<AuthContextType>({
 	isLoggedIn: false,
 	setIsLoggedIn: () => {},
 });
-1;
 
 type AuthProviderProps = {
 	children: React.ReactNode;
@@ -22,14 +21,14 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 	const [username, setUsername] = useState('');
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-	const authContextValue = {
+	const authCtx = {
 		username,
 		setUsername,
 		isLoggedIn,
 		setIsLoggedIn,
 	};
 
-	return <AuthContext.Provider value={authContextValue}>{children}</AuthContext.Provider>;
+	return <AuthContext.Provider value={authCtx}>{children}</AuthContext.Provider>;
 };
 
 export { AuthContext as authContext };

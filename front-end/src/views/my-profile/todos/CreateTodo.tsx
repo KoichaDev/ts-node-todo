@@ -1,6 +1,7 @@
 import { useId, useState } from 'react';
 import { CreateTodo } from './types/todo.types';
-import Input from '@/components/common/Input';
+import { Checkbox, Input, Button } from '@mantine/core';
+import { BsPlusLg, BsPencilSquare } from 'react-icons/bs';
 import useTodos from './hooks/useTodos';
 
 const initState = {
@@ -37,16 +38,18 @@ const CreateTodo = () => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
+		<form
+			className='flex-row align-items-center mt-10'
+			onSubmit={handleSubmit}>
 			<label
 				aria-label='Complete todo task?'
 				aria-describedby={toggleId}
-				className='text-gray-300 text-lg'
 			/>
-			<Input
-				type='checkbox'
+			<Checkbox
 				id={toggleId}
-				className='d-inline-block!'
+				size='xl'
+				color='teal'
+				classNames={{ input: 'bg-gray-700  border-radius-none! cursor-pointer' }}
 				checked={todo.completed}
 				onChange={handleChangeCompleted}
 			/>
@@ -54,17 +57,29 @@ const CreateTodo = () => {
 			<label
 				aria-label='Add your todo'
 				aria-describedby={inputTextId}
-				className='d-inline-block text-gray-300 text-lg'
 			/>
 			<Input
 				type='text'
+				icon={<BsPencilSquare />}
+				className='w-full'
+				classNames={{
+					input: 'bg-gray-700 text-white  border-radius-none!',
+				}}
 				id={inputTextId}
-				className='d-inline-block!'
 				value={todo.todo}
 				onChange={handleChangeTodo}
+				placeholder='Todo...'
 			/>
 
-			<button type='submit'>Add Todo</button>
+			<Button
+				leftIcon={<BsPlusLg />}
+				classNames={{
+					root: 'border-radius-none!',
+				}}
+				type='submit'
+				color='green'>
+				Add Todo
+			</Button>
 		</form>
 	);
 };

@@ -1,7 +1,7 @@
 export type Todo = {
 	readonly id: string;
 	todo: string;
-	completed: Boolean;
+	completed: boolean;
 };
 
 export type CreateTodo = {

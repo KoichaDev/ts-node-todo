@@ -1,6 +1,9 @@
 import ViewDashboard from './dashboard/ViewDashboard';
 import ViewTodo from './todos/ViewTodo';
 import ViewAuth from '../auth/ViewAuth';
+
+import TodoProvider from './todos/context/todo-provider';
+
 const myProfileRoutes = [
 	{
 		path: '/dashboard',
@@ -8,7 +11,11 @@ const myProfileRoutes = [
 		children: [
 			{
 				path: 'todos',
-				element: <ViewTodo />,
+				element: (
+					<TodoProvider>
+						<ViewTodo />,
+					</TodoProvider>
+				),
 			},
 			{
 				path: 'logout',
