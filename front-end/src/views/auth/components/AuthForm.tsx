@@ -1,7 +1,7 @@
 import { useState, useId, useEffect } from 'react';
 import useAuthLoginMutation from '../hooks/useAuth';
+import { Input, Button } from '@mantine/core';
 
-import Button from '@/components/common/Button';
 import styles from './AuthForm.module.scss';
 
 import { toast } from 'react-toastify';
@@ -81,7 +81,7 @@ const AuthForm = () => {
 					className='text-lg text-gray-400'>
 					Username:{' '}
 				</label>
-				<input
+				<Input
 					type='text'
 					id={usernameId}
 					value={auth.username}
@@ -95,7 +95,7 @@ const AuthForm = () => {
 					Password
 				</label>
 
-				<input
+				<Input
 					type='password'
 					id={passwordId}
 					value={auth.password}
@@ -104,7 +104,8 @@ const AuthForm = () => {
 				/>
 				<Button
 					type='submit'
-					variant='primary'>
+					className='mt-10'
+					color='teal'>
 					Enter
 				</Button>
 			</form>
