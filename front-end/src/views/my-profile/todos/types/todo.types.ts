@@ -1,5 +1,5 @@
 export type Todo = {
-	readonly id: string;
+	readonly id?: string;
 	todo: string;
 	completed: boolean;
 };

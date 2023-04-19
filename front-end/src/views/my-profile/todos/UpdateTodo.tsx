@@ -1,17 +1,27 @@
-import { useId, useState } from 'react';
+import { useId, useState, useEffect } from 'react';
 import { Checkbox, Input, Button } from '@mantine/core';
 import { BsFillTrash3Fill, BsPencilSquare } from 'react-icons/bs';
-
+import { debounce } from 'lodash';
 import useTodos from './hooks/useTodos';
 import { Todo } from './types/todo.types';
 
 const UpdateTodo = (props: Todo) => {
 	const [changeTodo, setChangeTodo] = useState({ ...props });
-
-	const { deleteTodoMutation } = useTodos();
-
-	const todoCompleteId = useId();
 	const todoId = useId();
+	const todoCompleteId = useId();
+	const { deleteTodoMutation, updateTodoMutation } = useTodos();
+
+	useEffect(() => {
+		const timeoutId = setTimeout(() => {
+			const payload = {
+				id: changeTodo.id,
+				todo: changeTodo.todo,
+				completed: changeTodo.completed,
+			};
+			updateTodoMutation.mutate(payload);
+		}, 2000);
+		return () => clearTimeout(timeoutId);
+	}, [changeTodo.todo]);
 
 	const handleDeleteTodo = (id: string) => {
 		deleteTodoMutation.mutate(id);
@@ -19,12 +29,13 @@ const UpdateTodo = (props: Todo) => {
 
 	const handleChangeCompleted = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const updatedCompleted = e.target.checked;
+
 		setChangeTodo((prevTodo) => {
 			return { ...prevTodo, completed: updatedCompleted };
 		});
 	};
 
-	const handleChangeTodo = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleChangeTodo = (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
 		const updatedValue = e.target.value;
 
 		setChangeTodo((prevTodo) => {
@@ -60,7 +71,7 @@ const UpdateTodo = (props: Todo) => {
 				}}
 				id={todoId}
 				value={changeTodo.todo}
-				onChange={handleChangeTodo}
+				onChange={(e) => handleChangeTodo(e, changeTodo.id as string)}
 				placeholder='Todo...'
 			/>
 
@@ -71,7 +82,7 @@ const UpdateTodo = (props: Todo) => {
 				classNames={{
 					root: 'border-radius-none!',
 				}}
-				onClick={handleDeleteTodo.bind(null, changeTodo.id)}>
+				onClick={handleDeleteTodo.bind(null, changeTodo.id as string)}>
 				Delete
 			</Button>
 		</li>
