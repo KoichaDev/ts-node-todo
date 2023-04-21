@@ -1,36 +1,40 @@
 import { useEffect } from 'react';
 import { Link, useMatch, useNavigate } from 'react-router-dom';
-import ROUTES from './constants/routesPath';
-// import ROUTES from '@/views/my-profile/myProfileRoutes';
+import ROUTES from '@/views/my-profile/myProfileRoutes';
 import _ from 'lodash';
 import styles from './Aside.module.scss';
-type RouterConfig = {
+
+type ReactRouterDOM = {
 	path: string;
-	children?: RouterConfig[];
+	text?: string;
+	children?: ReactRouterDOM[];
 };
 
-function findRouterPath(routerConfig: RouterConfig): RouterConfig[] {
-	const configs: RouterConfig[] = [];
+function getReactRouterPathDOM(routes: ReactRouterDOM[]): { link: string; text: string }[] {
+	const parentPath = {
+		link: '/',
+		text: 'dashboard',
+	};
 
-	if (routerConfig.children) {
-		routerConfig.children.map((child) => {
-			console.log(findRouterPath(child.path));
-			configs.push(...findRouterPath(child));
-		});
-	}
+	const childrenRoutes = routes.flatMap((route) => {
+		return (
+			route.children?.map(({ path }) => {
+				return {
+					link: path,
+					text: path,
+				};
+			}) ?? []
+		);
+	});
 
-	if (!routerConfig.children) {
-		configs.push(routerConfig);
-	}
-
-	return configs;
+	return [parentPath, ...childrenRoutes];
 }
 
 const Aside = () => {
 	const navigate = useNavigate();
 	const isMatchedLogoutPathName = useMatch('/dashboard/logout')?.pathname;
 
-	const routes = ROUTES.flatMap(findRouterPath);
+	const reactRouterPathDOM = getReactRouterPathDOM(ROUTES);
 
 	useEffect(() => {
 		if (isMatchedLogoutPathName) {
@@ -48,14 +52,13 @@ const Aside = () => {
 		<aside className={`[ ${styles['aside']} ]`}>
 			<header className={`[ ${styles['nav-menu']} ]`}>
 				<menu>
-					{ROUTES.map((route, index) => {
-						const { textContent, path } = route;
+					{reactRouterPathDOM.map((path, index) => {
 						return (
 							<li key={index}>
 								<Link
-									className='text-lg'
-									to={path}>
-									{textContent}
+									className='text-lg text-capitalize'
+									to={path.link}>
+									{path.text}
 								</Link>
 							</li>
 						);
