@@ -1,6 +1,7 @@
 import ViewDashboard from './dashboard/ViewDashboard';
-import ViewTodo from './todos/ViewTodo';
 import ViewAuth from '../auth/ViewAuth';
+import ViewTodo from './todos/ViewTodo';
+import ViewSettings from './settings/ViewSettings';
 
 import TodoProvider from './todos/context/todo-provider';
 
@@ -16,6 +17,10 @@ const myProfileRoutes = [
 						<ViewTodo />,
 					</TodoProvider>
 				),
+			},
+			{
+				path: 'settings',
+				element: <ViewSettings />,
 			},
 			{
 				path: 'logout',

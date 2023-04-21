@@ -1,11 +1,36 @@
 import { useEffect } from 'react';
 import { Link, useMatch, useNavigate } from 'react-router-dom';
 import ROUTES from './constants/routesPath';
+// import ROUTES from '@/views/my-profile/myProfileRoutes';
+import _ from 'lodash';
 import styles from './Aside.module.scss';
+type RouterConfig = {
+	path: string;
+	children?: RouterConfig[];
+};
+
+function findRouterPath(routerConfig: RouterConfig): RouterConfig[] {
+	const configs: RouterConfig[] = [];
+
+	if (routerConfig.children) {
+		routerConfig.children.map((child) => {
+			console.log(findRouterPath(child.path));
+			configs.push(...findRouterPath(child));
+		});
+	}
+
+	if (!routerConfig.children) {
+		configs.push(routerConfig);
+	}
+
+	return configs;
+}
 
 const Aside = () => {
 	const navigate = useNavigate();
 	const isMatchedLogoutPathName = useMatch('/dashboard/logout')?.pathname;
+
+	const routes = ROUTES.flatMap(findRouterPath);
 
 	useEffect(() => {
 		if (isMatchedLogoutPathName) {
