@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { Button } from '@mantine/core';
 
+import { BiArrowBack } from 'react-icons/bi';
 import AuthForm from '../components/AuthForm';
-
-import styles from './Login.module.scss';
 
 const Login = () => {
 	const authLocalStorage = localStorage.getItem('auth');
@@ -20,11 +20,18 @@ const Login = () => {
 	}, [isLoggedIn, isMounted]);
 
 	return (
-		<main className={`[ ${styles['view-auth']} ]`}>
+		<>
 			<h1 className='mb-2 text-4xl text-gray-400'>👨‍💻 Login</h1>
 
 			{!isLoggedIn && <AuthForm />}
-		</main>
+			<Button
+				leftIcon={<BiArrowBack />}
+				component={Link}
+				to='/'
+				className='mt-10'>
+				Go Back
+			</Button>
+		</>
 	);
 };
 

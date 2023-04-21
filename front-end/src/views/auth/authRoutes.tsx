@@ -3,11 +3,11 @@ import SignUp from './sign-up/SignUp';
 
 const authRoutes = [
 	{
-		path: '/',
+		path: 'login',
 		element: <Login />,
 	},
 	{
-		path: '/sign-up',
+		path: 'sign-up',
 		element: <SignUp />,
 	},
 ];
