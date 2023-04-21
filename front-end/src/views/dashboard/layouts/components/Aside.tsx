@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link, useMatch, useNavigate } from 'react-router-dom';
-import ROUTES from '@/views/dashboard/myProfileRoutes';
+import ROUTES from '@/views/dashboard/dashboardRoutes';
 import _ from 'lodash';
 import styles from './Aside.module.scss';
 

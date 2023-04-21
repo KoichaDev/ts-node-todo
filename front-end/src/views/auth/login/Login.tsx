@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import AuthForm from './components/AuthForm';
+import AuthForm from '../components/AuthForm';
 
-import styles from './ViewAuth.module.scss';
+import styles from './Login.module.scss';
 
-const ViewAuth = () => {
+const Login = () => {
 	const authLocalStorage = localStorage.getItem('auth');
 	const { isLoggedIn } = authLocalStorage ? JSON.parse(authLocalStorage) : { isLoggedIn: false };
 
@@ -28,4 +28,4 @@ const ViewAuth = () => {
 	);
 };
 
-export default ViewAuth;
+export default Login;

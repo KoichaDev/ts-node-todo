@@ -1,11 +1,11 @@
 import ViewDashboard from './dashboard/ViewDashboard';
-import ViewAuth from '../auth/ViewAuth';
+import ViewAuth from '../auth/login/Login';
 import ViewTodo from './todos/ViewTodo';
 import ViewSettings from './settings/ViewSettings';
 
 import TodoProvider from './todos/context/todo-provider';
 
-const myProfileRoutes = [
+const dashboardRoutes = [
 	{
 		path: '/dashboard',
 		element: <ViewDashboard />,
@@ -30,4 +30,4 @@ const myProfileRoutes = [
 	},
 ];
 
-export default myProfileRoutes;
+export default dashboardRoutes;
