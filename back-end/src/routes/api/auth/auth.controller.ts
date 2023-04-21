@@ -6,23 +6,31 @@ type LoginRequest = {
 	password: string;
 };
 
-const handleLogin = (req: Request<{}, {}, LoginRequest>, res: Response) => {
+type LoginResponse = Partial<LoginRequest> & {
+	status: number;
+	message?: string;
+	error?: {
+		message: string;
+	};
+};
+
+const handleLogin = (req: Request<{}, {}, LoginRequest>, res: Response<LoginResponse>) => {
 	const { username: requestUsername, password: requestPassword } = req.body;
 
-	for (const user of users) {
-		if (requestUsername !== user.username || requestPassword !== user.password) {
-			return res.status(400).send({
-				status: 400,
-				error: {
-					message: 'Unauthorized Access',
-				},
-			});
-		}
+	const user = users.find((user) => user.username === requestUsername && user.password === requestPassword);
+
+	if (user) {
+		return res.send({
+			status: 200,
+			message: 'Login successful',
+		});
 	}
 
-	return res.send({
-		status: 200,
-		message: 'Login successful',
+	return res.status(400).send({
+		status: 400,
+		error: {
+			message: 'Unauthorized Access',
+		},
 	});
 };
 
