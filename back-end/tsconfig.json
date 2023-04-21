@@ -111,6 +111,6 @@
 	"ts-node": {
 		"esm": true
 	},
-	"include": ["src/**/*.ts", "src/context/auth-provider.tsx", "src/context/auth-provider.tsx"],
+	"include": ["src/**/*.ts", "src/**/*.json"],
 	"exclude": ["node_modules", "**/*.spec.ts"]
 }

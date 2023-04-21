@@ -11,7 +11,7 @@ type PayloadAuthMutationType = {
 };
 
 const URLS = {
-	auth: 'http://localhost:8000/auth',
+	auth: 'http://localhost:8000/login',
 };
 
 type ErrorMessage = {

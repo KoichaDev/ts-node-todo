@@ -22,4 +22,15 @@ const users: Users[] = [
 	},
 ];
 
+try {
+	const fixtureUserData = require('./fixtures/users.json');
+
+	if (Array.isArray(fixtureUserData)) {
+		users.push(...fixtureUserData);
+	}
+} catch (error) {
+	console.error(error);
+}
+
+console.log(users);
 export default users;
