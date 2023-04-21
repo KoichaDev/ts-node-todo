@@ -1,16 +1,19 @@
 import { createBrowserRouter } from 'react-router-dom';
-import ViewHomePage from '@/views/homepage/ViewHomePage';
+
+// Routes
 import authRoutes from '../views/auth/authRoutes';
 import dashboardRoutes from '../views/dashboard/dashboardRoutes';
 import unauthorizedRoutes from '@/views/unauthorized/unauthorizedRoutes';
+
+// components
+import ViewHome from '@/views/home/ViewHome';
 import NotFound from '../views/NotFound';
 
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <ViewHomePage />,
-		errorElement: <NotFound />,
-		children: [...authRoutes],
+		element: <ViewHome />,
+		children: [...authRoutes, { path: '*', element: <NotFound /> }],
 	},
 	...dashboardRoutes,
 	...unauthorizedRoutes,

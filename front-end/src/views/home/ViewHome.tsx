@@ -2,11 +2,10 @@ import RootLayouts from '@/layouts/RootLayouts';
 import { Link } from 'react-router-dom';
 import { Button } from '@mantine/core';
 
-const ViewHomePage = () => {
+const ViewHome = () => {
 	return (
 		<RootLayouts>
 			<Button
-				type='button'
 				component={Link}
 				to='/login'
 				color='teal'>
@@ -14,7 +13,6 @@ const ViewHomePage = () => {
 			</Button>
 
 			<Button
-				type='button'
 				component={Link}
 				to='/sign-up'
 				color='teal'
@@ -25,4 +23,4 @@ const ViewHomePage = () => {
 	);
 };
 
-export default ViewHomePage;
+export default ViewHome;
