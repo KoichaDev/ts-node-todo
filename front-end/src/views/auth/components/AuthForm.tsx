@@ -1,42 +1,19 @@
-import { useState, useId, useEffect } from 'react';
-import useAuth from '../hooks/useAuth';
+import { useId } from 'react';
 import { Input, Button } from '@mantine/core';
-import { InitialState, AuthContextProps } from '../context/auth-provider.types';
+import { AuthContextProps } from '../context/auth-provider.types';
+import { User } from '../types/auth.types';
 
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
-type Auth = InitialState;
+type OnAddHandleSubmit = {
+	onAddHandleSubmit: (payload: User) => void;
+};
 
-const AuthForm = ({ auth, setAuth }: AuthContextProps) => {
-	const [isInputFocused, setIsInputFocused] = useState(false);
-
-	const { loginAuthMutation } = useAuth();
-
+const AuthForm = ({ auth, setAuth, onAddHandleSubmit }: AuthContextProps & OnAddHandleSubmit) => {
 	const usernameId = useId();
 	const passwordId = useId();
-
-	const isError = loginAuthMutation.isError;
-	const errorMessage = loginAuthMutation.error?.response.data.error.message;
-
-	const textErrorClassName = isError && !isInputFocused ? 'text-red-400' : 'text-gray-400';
-
-	useEffect(() => {
-		if (errorMessage !== undefined) {
-			toast(`❌ ${errorMessage}!`, {
-				position: 'top-center',
-				autoClose: 2500,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: 'colored',
-			});
-		}
-	}, [isError, errorMessage]);
 
 	const handleChangeUsername = (e: ChangeEvent) => {
 		const enteredUsername = e.target.value;
@@ -60,7 +37,7 @@ const AuthForm = ({ auth, setAuth }: AuthContextProps) => {
 			password: auth.password,
 		};
 
-		loginAuthMutation.mutate(payload);
+		onAddHandleSubmit(payload);
 
 		setAuth({
 			username: '',
@@ -75,7 +52,7 @@ const AuthForm = ({ auth, setAuth }: AuthContextProps) => {
 				onSubmit={handleSubmit}>
 				<label
 					htmlFor={usernameId}
-					className={`text-lg ${textErrorClassName}`}>
+					className='text-lg text-gray-400'>
 					Username:{' '}
 				</label>
 				<Input
@@ -84,14 +61,15 @@ const AuthForm = ({ auth, setAuth }: AuthContextProps) => {
 					value={auth.username}
 					onChange={handleChangeUsername}
 					placeholder='username...'
-					error={isError && !isInputFocused}
-					onFocus={() => setIsInputFocused(true)}
-					onBlur={() => setIsInputFocused(false)}
+					// error={isError && !isInputFocused}
 				/>
 
 				<label
 					htmlFor={passwordId}
-					className={`text-lg ${textErrorClassName}`}>
+					className='text-lg text-gray-400'
+
+					// className={`text-lg ${textErrorClassName}`}
+				>
 					Password
 				</label>
 
@@ -101,9 +79,6 @@ const AuthForm = ({ auth, setAuth }: AuthContextProps) => {
 					value={auth.password}
 					onChange={handleChangePassword}
 					placeholder='password...'
-					error={isError && !isInputFocused}
-					onFocus={() => setIsInputFocused(true)}
-					onBlur={() => setIsInputFocused(false)}
 				/>
 				<Button
 					type='submit'
