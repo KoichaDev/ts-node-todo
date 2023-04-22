@@ -17,10 +17,13 @@ const useAuthLoginMutation = () => {
 			return authLogin(payload);
 		},
 		{
-			onError: () => setAuth(prevAuth => ({...prevAuth, auth: {
-				isLoggedIn: false
-			}})),
+			onError: () => setAuth(prevAuth => {
+				return {...prevAuth, isLoggedIn: false }
+			}),
 			onSuccess: () => {
+				setAuth(prevAuth => {
+					return {...prevAuth, isLoggedIn: true }
+				})
 				localStorage.setItem('auth', JSON.stringify({isLoggedIn: true}))
 				navigate('/dashboard');
 			},

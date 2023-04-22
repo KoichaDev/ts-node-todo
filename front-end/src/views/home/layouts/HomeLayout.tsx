@@ -1,8 +1,8 @@
 import { Outlet, useMatch } from 'react-router-dom';
 
-import styles from './RootLayout.module.scss';
+import styles from './HomeLayout.module.scss';
 
-const RootLayouts = ({ children }: { children: React.ReactNode }) => {
+const HomeLayout = ({ children }: { children: React.ReactNode }) => {
 	const isRootPath = useMatch('/')?.pathname;
 
 	return (
@@ -13,4 +13,4 @@ const RootLayouts = ({ children }: { children: React.ReactNode }) => {
 	);
 };
 
-export default RootLayouts;
+export default HomeLayout;

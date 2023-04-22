@@ -1,10 +1,10 @@
-import RootLayouts from '@/layouts/RootLayouts';
+import HomeLayout from '@/views/home/layouts/HomeLayout';
 import { Link } from 'react-router-dom';
 import { Button } from '@mantine/core';
 
 const ViewHome = () => {
 	return (
-		<RootLayouts>
+		<HomeLayout>
 			<Button
 				component={Link}
 				to='/login'
@@ -19,7 +19,7 @@ const ViewHome = () => {
 				className='mt-10'>
 				Sign Up
 			</Button>
-		</RootLayouts>
+		</HomeLayout>
 	);
 };
 

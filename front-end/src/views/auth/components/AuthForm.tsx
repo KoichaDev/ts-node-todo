@@ -1,8 +1,7 @@
 import { useState, useId, useEffect } from 'react';
-import useAuthLoginMutation from '../hooks/useAuth';
+import useAuth from '../hooks/useAuth';
 import { Input, Button } from '@mantine/core';
 import { InitialState, AuthContextProps } from '../context/auth-provider.types';
-import styles from './AuthForm.module.scss';
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,7 +13,7 @@ type Auth = InitialState;
 const AuthForm = ({ auth, setAuth }: AuthContextProps) => {
 	const [isInputFocused, setIsInputFocused] = useState(false);
 
-	const { loginAuthMutation } = useAuthLoginMutation();
+	const { loginAuthMutation } = useAuth();
 
 	const usernameId = useId();
 	const passwordId = useId();
@@ -72,7 +71,7 @@ const AuthForm = ({ auth, setAuth }: AuthContextProps) => {
 	return (
 		<>
 			<form
-				className={`${styles['auth-form']}`}
+				className='flex-column'
 				onSubmit={handleSubmit}>
 				<label
 					htmlFor={usernameId}
