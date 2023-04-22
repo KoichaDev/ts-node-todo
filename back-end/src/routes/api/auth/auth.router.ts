@@ -4,6 +4,6 @@ import { handleLogin, handleSignUp } from './auth.controller';
 const auth = express();
 
 auth.post('/login', handleLogin);
-auth.post('/signup', handleSignUp);
+auth.post('/sign-up', handleSignUp);
 
 export default auth;

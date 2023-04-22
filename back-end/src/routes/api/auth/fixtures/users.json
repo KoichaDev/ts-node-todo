@@ -4,5 +4,17 @@
     "username": "test",
     "password": "test",
     "role": 1
+  },
+  {
+    "id": "264881c4-4643-443b-a995-fc1d59531b36",
+    "username": "asdasd",
+    "password": "asd",
+    "role": 1
+  },
+  {
+    "id": "98278dae-71b8-4411-a9fb-b81bfb1cdb13",
+    "username": "broman",
+    "password": "bro",
+    "role": 1
   }
 ]
