@@ -12,7 +12,7 @@ type ReactRouterDOM = {
 
 function getReactRouterPathDOM(routes: ReactRouterDOM[]): { link: string; text: string }[] {
 	const parentPath = {
-		link: '/',
+		link: '/dashboard',
 		text: 'dashboard',
 	};
 

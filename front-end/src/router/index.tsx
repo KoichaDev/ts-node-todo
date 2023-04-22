@@ -9,10 +9,16 @@ import unauthorizedRoutes from '@/views/unauthorized/unauthorizedRoutes';
 import ViewHome from '@/views/home/ViewHome';
 import NotFound from '../views/NotFound';
 
+import AuthProvider from '../views/auth/context/auth-provider';
+
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <ViewHome />,
+		element: (
+			<AuthProvider>
+				<ViewHome />
+			</AuthProvider>
+		),
 		children: [...authRoutes, { path: '*', element: <NotFound /> }],
 	},
 	...dashboardRoutes,

@@ -5,10 +5,11 @@ import { AxiosResponse } from 'axios';
 
 import { authLogin } from '../services/authService';
 import { User, AuthError } from '../types/auth.types';
-import { authContext } from '@/context/auth-provider';
+import { authContext } from '../context/auth-provider';
 
 const useAuthLoginMutation = () => {
-	const { setIsLoggedIn } = useContext(authContext);
+	const { setAuth } = useContext(authContext);
+
 	const navigate = useNavigate();
 
 	// prettier-ignore
@@ -16,9 +17,10 @@ const useAuthLoginMutation = () => {
 			return authLogin(payload);
 		},
 		{
-			onError: () => setIsLoggedIn(false),
+			onError: () => setAuth(prevAuth => ({...prevAuth, auth: {
+				isLoggedIn: false
+			}})),
 			onSuccess: () => {
-				setIsLoggedIn(true);
 				localStorage.setItem('auth', JSON.stringify({isLoggedIn: true}))
 				navigate('/dashboard');
 			},

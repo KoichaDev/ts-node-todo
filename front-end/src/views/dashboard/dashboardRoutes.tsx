@@ -1,5 +1,5 @@
 import ViewDashboard from './dashboard/ViewDashboard';
-import ViewAuth from '../auth/login/Login';
+import Login from '../auth/views/Login';
 import ViewTodo from './todos/ViewTodo';
 import ViewSettings from './settings/ViewSettings';
 
@@ -24,7 +24,7 @@ const dashboardRoutes = [
 			},
 			{
 				path: 'logout',
-				element: <ViewAuth />,
+				element: <Login />,
 			},
 		],
 	},

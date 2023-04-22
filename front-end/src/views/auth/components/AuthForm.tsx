@@ -1,7 +1,7 @@
 import { useState, useId, useEffect } from 'react';
 import useAuthLoginMutation from '../hooks/useAuth';
 import { Input, Button } from '@mantine/core';
-
+import { InitialState, AuthContextProps } from '../context/auth-provider.types';
 import styles from './AuthForm.module.scss';
 
 import { toast } from 'react-toastify';
@@ -9,18 +9,9 @@ import 'react-toastify/dist/ReactToastify.css';
 
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
-type Auth = {
-	username: string;
-	password: string;
-};
+type Auth = InitialState;
 
-const initState: Auth = {
-	username: '',
-	password: '',
-};
-
-const AuthForm = () => {
-	const [auth, setAuth] = useState(initState);
+const AuthForm = ({ auth, setAuth }: AuthContextProps) => {
 	const [isInputFocused, setIsInputFocused] = useState(false);
 
 	const { loginAuthMutation } = useAuthLoginMutation();
@@ -72,7 +63,10 @@ const AuthForm = () => {
 
 		loginAuthMutation.mutate(payload);
 
-		setAuth(initState);
+		setAuth({
+			username: '',
+			password: '',
+		});
 	};
 
 	return (
