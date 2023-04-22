@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
+// import { InitialStates } from '../context/auth-provider.types';
 
 import { authLogin, authSignUp } from '../services/authService';
 import { User, AuthError } from '../types/auth.types';
@@ -8,23 +9,18 @@ import { User, AuthError } from '../types/auth.types';
 const useAuthLoginMutation = () => {
 	const navigate = useNavigate();
 
-	// prettier-ignore
-	const loginAuthMutation = useMutation<AxiosResponse, AuthError, User>((payload: User) => {
-			return authLogin(payload);
+	const loginAuthMutation = useMutation<AxiosResponse, AuthError, User>({
+		mutationFn: (payload: User) => authLogin(payload),
+		onSuccess: () => {
+			localStorage.setItem('auth', JSON.stringify({ isLoggedIn: true }));
+			navigate('/dashboard');
 		},
-		{
-			onSuccess: () => {
-				localStorage.setItem('auth', JSON.stringify({isLoggedIn: true}))
-				navigate('/dashboard');
-			},
-		}
-	);
+	});
 
 	// prettier-ignore
-	const signUpAuthMutation = useMutation<AxiosResponse, AuthError, User>((payload: User) => {
-		return authSignUp(payload);
-	},
+	const signUpAuthMutation = useMutation<AxiosResponse, AuthError, User>(
 	{
+		mutationFn: (payload: User) => authSignUp(payload),
 		onSuccess: () => {
 			localStorage.setItem('auth', JSON.stringify({isLoggedIn: true}))
 			navigate('/dashboard');
