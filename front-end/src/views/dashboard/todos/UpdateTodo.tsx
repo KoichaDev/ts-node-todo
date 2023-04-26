@@ -1,7 +1,6 @@
 import { useId, useState, useEffect } from 'react';
 import { Checkbox, Input, Button } from '@mantine/core';
 import { BsFillTrash3Fill, BsPencilSquare } from 'react-icons/bs';
-import { debounce } from 'lodash';
 import useTodos from './hooks/useTodos';
 import { Todo } from './types/todo.types';
 

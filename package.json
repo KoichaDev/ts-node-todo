@@ -1,0 +1,17 @@
+{
+  "name": "ts-full-stack-react-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install:server": "pnpm i --prefix back-end",
+		"install:client": "pnpm i --prefix front-end",
+    "install": "pnpm run install:server && pnpm run install:client",
+    "dev:server": "npm run dev --prefix back-end",
+		"dev:client": "npm run dev --prefix front-end",
+    "dev": "npm run dev:server & npm run dev:client"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
