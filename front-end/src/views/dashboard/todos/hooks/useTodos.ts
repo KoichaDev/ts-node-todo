@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { CreateTodo } from '../types/todo.types';
 import { fetchTodos, createTodo, deleteTodo, updateTodo } from '../services/todoService';
-import { AxiosResponse, AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { Todo } from '../types/todo.types';
 
 const useTodos = () => {

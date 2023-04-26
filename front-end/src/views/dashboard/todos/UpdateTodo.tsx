@@ -17,10 +17,15 @@ const UpdateTodo = (props: Todo) => {
 				todo: changeTodo.todo,
 				completed: changeTodo.completed,
 			};
+
 			updateTodoMutation.mutate(payload);
 		}, 2000);
 		return () => clearTimeout(timeoutId);
-	}, [changeTodo.todo]);
+	}, [changeTodo.todo, changeTodo.completed]);
+
+	useEffect(() => {
+		updateTodoMutation.mutate(changeTodo);
+	}, [changeTodo.completed]);
 
 	const handleDeleteTodo = (id: string) => {
 		deleteTodoMutation.mutate(id);
