@@ -32,5 +32,4 @@ try {
 	console.error(error);
 }
 
-console.log(users);
 export default users;
