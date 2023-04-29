@@ -4,9 +4,9 @@ export const enum Role {
 	GUEST,
 }
 
-export type Users = {
-	id?: string;
-	username: string;
-	password: string;
-	role: Role;
+export type User = {
+	readonly id?: string;
+	readonly username: string;
+	readonly password: string;
+	readonly role: Role;
 };

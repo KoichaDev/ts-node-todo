@@ -1,14 +1,15 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
-import { Users } from './user.types';
+import { User } from './user.types';
+import { HttpStatus, StatusCode, ErrorMessage, SuccessMessage } from '@/types/httpStatus';
 import usersModel from './users.model';
 
-const handleLoginUser = async (req: Request<{}, {}, Users>, res: Response) => {
+const handleLoginUser = async (req: Request<{}, {}, User>, res: Response<StatusCode & Partial<ErrorMessage>>) => {
 	const { username: requestUsername, password: requestPassword } = req.body;
 
 	if (!requestUsername && !requestPassword) {
-		return res.status(401).json({
-			status: 401,
+		return res.status(HttpStatus.UNAUTHORIZED).json({
+			status: HttpStatus.UNAUTHORIZED,
 			error: {
 				message: 'Username and password are required!',
 			},
@@ -16,8 +17,8 @@ const handleLoginUser = async (req: Request<{}, {}, Users>, res: Response) => {
 	}
 
 	if (!requestUsername) {
-		return res.status(401).json({
-			status: 401,
+		return res.status(HttpStatus.UNAUTHORIZED).json({
+			status: HttpStatus.UNAUTHORIZED,
 			error: {
 				message: 'Username are required!',
 			},
@@ -25,8 +26,8 @@ const handleLoginUser = async (req: Request<{}, {}, Users>, res: Response) => {
 	}
 
 	if (!requestPassword) {
-		return res.status(401).json({
-			status: 401,
+		return res.status(HttpStatus.UNAUTHORIZED).json({
+			status: HttpStatus.UNAUTHORIZED,
 			error: {
 				message: 'Password are required!',
 			},
@@ -35,27 +36,30 @@ const handleLoginUser = async (req: Request<{}, {}, Users>, res: Response) => {
 
 	const foundUser = await usersModel.findOne({ username: requestUsername }).exec();
 
-	if (!foundUser) return res.sendStatus(401);
+	if (!foundUser) return res.sendStatus(HttpStatus.UNAUTHORIZED);
 
 	const userPassword = foundUser.password;
 
-	if (!userPassword) return res.sendStatus(401);
+	if (!userPassword) return res.sendStatus(HttpStatus.UNAUTHORIZED);
 
 	const isPasswordMatched = await bcrypt.compare(requestPassword, userPassword);
 
-	if (!isPasswordMatched) return res.sendStatus(401);
+	if (!isPasswordMatched) return res.sendStatus(HttpStatus.UNAUTHORIZED);
 
-	return res.status(200).json({
-		status: 200,
+	return res.status(HttpStatus.OK).json({
+		status: HttpStatus.OK,
 	});
 };
 
-const handleSignUpUser = async (req: Request, res: Response) => {
+const handleSignUpUser = async (
+	req: Request<{}, {}, User>,
+	res: Response<StatusCode & Partial<ErrorMessage & SuccessMessage>>
+) => {
 	const { username: requestUsername, password: requestPassword } = req.body;
 
 	if (!requestUsername && !requestPassword) {
-		return res.status(401).json({
-			status: 401,
+		return res.status(HttpStatus.UNAUTHORIZED).json({
+			status: HttpStatus.UNAUTHORIZED,
 			error: {
 				message: 'Username and password are required!',
 			},
@@ -65,8 +69,8 @@ const handleSignUpUser = async (req: Request, res: Response) => {
 	const isDuplicatedUser = await usersModel.findOne({ username: requestUsername }).exec();
 
 	if (isDuplicatedUser) {
-		return res.status(409).json({
-			status: 409,
+		return res.status(HttpStatus.CONFLICT).json({
+			status: HttpStatus.CONFLICT,
 			error: {
 				message: `username ${requestPassword} exist`,
 			},
@@ -84,15 +88,15 @@ const handleSignUpUser = async (req: Request, res: Response) => {
 
 		await usersModel.create(userPayload);
 
-		return res.status(201).json({
-			status: 201,
+		return res.status(HttpStatus.SUCCESS).json({
+			status: HttpStatus.SUCCESS,
 			message: `New user ${requestUsername} has been created`,
 		});
 	} catch (error) {
-		return res.send(500).json({
-			status: 500,
+		return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+			status: HttpStatus.INTERNAL_SERVER_ERROR,
 			error: {
-				message: error,
+				message: error as Error,
 			},
 		});
 	}
