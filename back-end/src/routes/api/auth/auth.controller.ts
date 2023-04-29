@@ -1,10 +1,21 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
-import { User } from './user.types';
-import { HttpStatus, StatusCode, ErrorMessage, SuccessMessage } from '@/types/httpStatus';
-import usersModel from './users.model';
+import jwt from 'jsonwebtoken';
 
-const handleLoginUser = async (req: Request<{}, {}, User>, res: Response<StatusCode & Partial<ErrorMessage>>) => {
+import userDB from './users.model';
+
+import { ExpirationTime } from '@/config/jwt';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../../config/env';
+
+import { AccessToken } from './types/auth.types';
+
+import { User } from './types/user.types';
+import { HttpStatus, StatusCode, ErrorMessage, SuccessMessage } from '@/types/httpStatus';
+
+const handleLoginUser = async (
+	req: Request<{}, {}, User>,
+	res: Response<(StatusCode | AccessToken) & Partial<ErrorMessage>>
+) => {
 	const { username: requestUsername, password: requestPassword } = req.body;
 
 	if (!requestUsername && !requestPassword) {
@@ -34,11 +45,11 @@ const handleLoginUser = async (req: Request<{}, {}, User>, res: Response<StatusC
 		});
 	}
 
-	const foundUser = await usersModel.findOne({ username: requestUsername }).exec();
+	const foundUsername = await userDB.findOne({ username: requestUsername }).exec();
 
-	if (!foundUser) return res.sendStatus(HttpStatus.UNAUTHORIZED);
+	if (!foundUsername) return res.sendStatus(HttpStatus.UNAUTHORIZED);
 
-	const userPassword = foundUser.password;
+	const userPassword = foundUsername.password;
 
 	if (!userPassword) return res.sendStatus(HttpStatus.UNAUTHORIZED);
 
@@ -46,8 +57,26 @@ const handleLoginUser = async (req: Request<{}, {}, User>, res: Response<StatusC
 
 	if (!isPasswordMatched) return res.sendStatus(HttpStatus.UNAUTHORIZED);
 
+	const payloadToken = {
+		username: foundUsername,
+	};
+
+	const accessToken = jwt.sign(payloadToken, ACCESS_TOKEN, {
+		expiresIn: ExpirationTime.halfSecond,
+	});
+
+	const refreshToken = jwt.sign(payloadToken, REFRESH_TOKEN, {
+		expiresIn: ExpirationTime.oneDay,
+	});
+
+	// const otherUser = userDB.users.filter((person) => person.username !== foundUsername.userName);
+	// const currentUser = { ...foundUsername, refreshToken };
+
+	res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
+
 	return res.status(HttpStatus.OK).json({
 		status: HttpStatus.OK,
+		accessToken,
 	});
 };
 
@@ -66,7 +95,7 @@ const handleSignUpUser = async (
 		});
 	}
 
-	const isDuplicatedUser = await usersModel.findOne({ username: requestUsername }).exec();
+	const isDuplicatedUser = await userDB.findOne({ username: requestUsername }).exec();
 
 	if (isDuplicatedUser) {
 		return res.status(HttpStatus.CONFLICT).json({
@@ -86,7 +115,7 @@ const handleSignUpUser = async (
 			password: hashedPassword,
 		};
 
-		await usersModel.create(userPayload);
+		await userDB.create(userPayload);
 
 		return res.status(HttpStatus.SUCCESS).json({
 			status: HttpStatus.SUCCESS,
