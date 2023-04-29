@@ -1,35 +1,18 @@
-import crypto from 'crypto';
-import { Users, Role } from './user.types';
+import mongoose from 'mongoose';
 
-const users: Users[] = [
-	{
-		id: crypto.randomUUID(),
-		username: 'admin',
-		password: 'admin',
-		role: Role.ADMIN,
+const Schema = mongoose.Schema;
+
+const userSchema = new Schema({
+	username: {
+		type: String,
+		require: true,
 	},
-	{
-		id: crypto.randomUUID(),
-		username: 'user',
-		password: 'user',
-		role: Role.USER,
+	password: {
+		type: String,
+		require: true,
 	},
-	{
-		id: crypto.randomUUID(),
-		username: 'guest',
-		password: 'guest',
-		role: Role.GUEST,
-	},
-];
+});
 
-try {
-	const fixtureUserData = require('./fixtures/users.json');
+const user = mongoose.model('Users', userSchema);
 
-	if (Array.isArray(fixtureUserData)) {
-		users.push(...fixtureUserData);
-	}
-} catch (error) {
-	console.error(error);
-}
-
-export default users;
+export default user;

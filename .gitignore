@@ -6,3 +6,5 @@ build
 public
 
 .vscode
+
+.env

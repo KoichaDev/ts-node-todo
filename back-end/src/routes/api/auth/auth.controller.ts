@@ -1,89 +1,101 @@
 import { Request, Response } from 'express';
-import fs from 'fs';
-import crypto from 'crypto';
-import users from './users.model';
-import { writeUserToFile } from './helpers/userFileSystem';
-import { USER_DATA_FILE } from './constants/filePath';
+import bcrypt from 'bcrypt';
+import { Users } from './user.types';
+import usersModel from './users.model';
 
-type User = {
-	username: string;
-	password: string;
-};
-
-type LoginResponse = Partial<User> & {
-	status: number;
-	message?: string;
-	error?: {
-		message: string;
-	};
-};
-
-const handleLogin = (req: Request<{}, {}, User>, res: Response<LoginResponse>) => {
+const handleLoginUser = async (req: Request<{}, {}, Users>, res: Response) => {
 	const { username: requestUsername, password: requestPassword } = req.body;
 
-	const user = users.find((user) => user.username === requestUsername && user.password === requestPassword);
-
-	if (user) {
-		return res.send({
-			status: 200,
-			message: 'Login successful',
+	if (!requestUsername && !requestPassword) {
+		return res.status(401).json({
+			status: 401,
+			error: {
+				message: 'Username and password are required!',
+			},
 		});
 	}
 
-	return res.status(400).send({
-		status: 400,
-		error: {
-			message: 'Unauthorized Access',
-		},
+	if (!requestUsername) {
+		return res.status(401).json({
+			status: 401,
+			error: {
+				message: 'Username are required!',
+			},
+		});
+	}
+
+	if (!requestPassword) {
+		return res.status(401).json({
+			status: 401,
+			error: {
+				message: 'Password are required!',
+			},
+		});
+	}
+
+	const foundUser = await usersModel.findOne({ username: requestUsername }).exec();
+
+	if (!foundUser) return res.sendStatus(401);
+
+	const userPassword = foundUser.password;
+
+	if (!userPassword) return res.sendStatus(401);
+
+	const isPasswordMatched = await bcrypt.compare(requestPassword, userPassword);
+
+	if (!isPasswordMatched) return res.sendStatus(401);
+
+	return res.status(200).json({
+		status: 200,
 	});
 };
 
-const handleSignUp = (req: Request<{}, {}, User>, res: Response<LoginResponse>) => {
-	const { username, password } = req.body;
+const handleSignUpUser = async (req: Request, res: Response) => {
+	const { username: requestUsername, password: requestPassword } = req.body;
 
-	if (username.length === 0 && password.length === 0) {
-		return res.status(400).send({
-			status: 400,
+	if (!requestUsername && !requestPassword) {
+		return res.status(401).json({
+			status: 401,
 			error: {
-				message: 'Require username and password',
+				message: 'Username and password are required!',
 			},
 		});
 	}
 
-	if (username.length === 0) {
-		return res.status(400).send({
-			status: 400,
+	const isDuplicatedUser = await usersModel.findOne({ username: requestUsername }).exec();
+
+	if (isDuplicatedUser) {
+		return res.status(409).json({
+			status: 409,
 			error: {
-				message: 'Require username',
+				message: `username ${requestPassword} exist`,
 			},
 		});
 	}
 
-	if (password.length === 0) {
-		return res.status(400).send({
-			status: 400,
-			error: {
-				message: 'Require password',
-			},
-		});
-	}
+	try {
+		const SALT_ROUND = 14;
+		const hashedPassword = await bcrypt.hash(requestPassword, SALT_ROUND);
 
-	fs.access(USER_DATA_FILE, (err) => {
-		const newUser = { id: crypto.randomUUID(), username, password, role: 1 };
-		if (err) {
-			writeUserToFile([newUser]);
-		}
+		const userPayload = {
+			username: requestUsername,
+			password: hashedPassword,
+		};
 
-		const fixtureUserData = require('./fixtures/users.json');
-		const users = [...fixtureUserData, newUser];
+		await usersModel.create(userPayload);
 
-		writeUserToFile(users);
-
-		return res.status(201).send({
+		return res.status(201).json({
 			status: 201,
-			message: 'Successful',
+			message: `New user ${requestUsername} has been created`,
 		});
-	});
+	} catch (error) {
+		return res.send(500).json({
+			status: 500,
+			error: {
+				message: error,
+			},
+		});
+	}
 };
 
-export { handleLogin, handleSignUp };
+export { handleLoginUser, handleSignUpUser };
