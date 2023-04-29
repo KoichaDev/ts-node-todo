@@ -1,12 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { HttpStatus } from '../types/httpStatus';
-import { ACCESS_TOKEN } from '../config/env';
+import { ACCESS_TOKEN_SECRET } from '../config/env';
 
 require('dotenv').config();
 
 type AuthenticatedRequest = Request & {
-	user?: string;
+	username?: string;
 };
 
 const verifyJWT = (req: AuthenticatedRequest, res: Response, next: NextFunction): Response | void => {
@@ -16,22 +16,20 @@ const verifyJWT = (req: AuthenticatedRequest, res: Response, next: NextFunction)
 
 	const bearerToken = authHeader.split(' ').at(1);
 
-	console.log(bearerToken);
-
 	if (!bearerToken) {
 		return res.send(HttpStatus.INTERNAL_SERVER_ERROR).json({
 			status: HttpStatus.INTERNAL_SERVER_ERROR,
 		});
 	}
-	jwt.verify(bearerToken, ACCESS_TOKEN, (error, decode) => {
+	jwt.verify(bearerToken, ACCESS_TOKEN_SECRET, (error, decode) => {
 		if (error) return res.sendStatus(HttpStatus.FORBIDDEN); // Invalid token
 
-		if (decode && typeof decode === 'object') {
-			req.user = decode.username;
-			next();
-		} else {
+		if (!decode || typeof decode !== 'object') {
 			return res.sendStatus(HttpStatus.FORBIDDEN); // Invalid token
 		}
+
+		req.username = decode.username;
+		next();
 	});
 };
 

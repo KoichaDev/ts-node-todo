@@ -4,9 +4,11 @@ export const enum Role {
 	GUEST,
 }
 
+export type RefreshToken = {
+	refreshToken: string | undefined | null;
+};
+
 export type User = {
-	readonly id?: string;
 	readonly username: string;
 	readonly password: string;
-	readonly role: Role;
 };

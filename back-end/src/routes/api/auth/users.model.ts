@@ -11,6 +11,10 @@ const userSchema = new Schema({
 		type: String,
 		require: true,
 	},
+	refreshToken: {
+		type: String,
+		require: true,
+	},
 });
 
 const user = mongoose.model('Users', userSchema);
