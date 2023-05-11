@@ -1,8 +1,0 @@
-@use '@/scss/utilities/colors' as *;
-
-.main {
-	grid-area: main;
-	padding: 2em;
-	padding-left: 5em;
-	@extend .bg-blue-gray-800;
-}
